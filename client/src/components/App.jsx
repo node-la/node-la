@@ -66,11 +66,13 @@ class App extends React.Component {
   getAllPosts() {
     return axios.get('/posts')
       .then(response => {
+        console.log(response.data);
+        //jill added 
         this.setState({
-          posts: response.data.data,
+          posts: response.data,
         })
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to get all posts', error))
   }
 
   // function to get all posts from the signed in user and set username state
@@ -88,7 +90,7 @@ class App extends React.Component {
           userPosts: response.data.data,
         })
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to get User Posts', error))
   }
 
   // function to load user info into state
@@ -99,7 +101,7 @@ class App extends React.Component {
           userId: response.data.data[0].id,
         })
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to get userLogin', error))
   }
 
   // function to save new username to the db and set username state
@@ -111,7 +113,7 @@ class App extends React.Component {
       'username': username,
     })
       .then(response => response)
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to get user signup', error))
   }
 
   // function to create a new post and save it to the db
@@ -124,7 +126,7 @@ class App extends React.Component {
       'username': this.state.username,
     })
       .then(response => response)
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to create post', error))
   }
 
   // function to create a new post
@@ -136,7 +138,7 @@ class App extends React.Component {
       'commentVotes': 0,
     })
       .then(response => console.log(response))
-      .catch(error => console.log(error))
+      .catch(error => console.log('failed to create a comment', error))
   }
 
   // function to store all current comments in state for main post view

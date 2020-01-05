@@ -153,13 +153,13 @@ const createPost = function (req, res) {
     });
   })
   .then((data) => {
-    data;
+    console.log(data);
     res.status(201)
-      .json({
+      res.send(JSON.stringify({
         status: 'success',
         data: data,
         message: 'Created a new Post!'
-      });
+      }));
   })
   .catch((err) => {
     res.status(400);
@@ -210,14 +210,19 @@ const usersPosts = function (req, res, next) {
 //! READ POST
 const getPosts = function (req, res, next) {
   const {userId} = req.query;
-  Post.findAll()
+  Post.findAll({
+    //jill added attributes array
+    attributes: ['title', 'postBody', 'createdAt', 'userPostId' ]
+  })
     .then((response) => {
       res.status(200);
-      res.send(JSON.stringify({
-        status: 'success',
-        data: response,
-        message: 'Here are all the posts!'
-      }));
+      res.send(JSON.stringify(response))
+      //sending empty array with just response
+      // {
+      //   status: 'success',
+      //   data: response,
+      //   message: 'Here are all the posts!'
+      // }));
       return next();
     })
     .catch(err => {
