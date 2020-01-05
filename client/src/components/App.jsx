@@ -48,6 +48,7 @@ class App extends React.Component {
       .catch(error => {
         console.error('Failed to get weather', error);
       });
+
     // set posts state with all posts from db
     this.getAllPosts()
       .catch(error => {
@@ -141,7 +142,7 @@ class App extends React.Component {
 
   // function to store all current comments in state for main post view
   getComments(){
-
+    
   }
 
   // function to change views
