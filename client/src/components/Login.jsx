@@ -23,7 +23,6 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
   const [open, setOpen] = useState(false);
   const [hood, setHood] = useState('');
   const [usernameValue, setUsernameValue] = useState('');
-  const [hoodValue, setHoodValue] = useState('');
 
   const handleOpen = () => {
     setOpen(true);
@@ -85,7 +84,7 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
             <DialogActions>
               <Button onClick={handleClose} color="primary">Cancel</Button>
               <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue) }} color="primary">Login</Button>
-              <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue); }} color="primary">Sign Up</Button>
+              <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue, hood); }} color="primary">Sign Up</Button>
             </DialogActions>
           </Dialog>
     </div>

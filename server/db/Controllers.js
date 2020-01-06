@@ -8,8 +8,8 @@ const app = express(feathers());
 //create & save a user to the db
 // !CREATE USER
 const createUser = function (req, res, next) {
-  const { username, hood } = req.body; // Grab username and hood from req body
-  const id = req.body.id; // Grab password from req body
+  const { username, hood, id } = req.body; // Grab username, id, and hood from req body
+  console.log(req.body)
   // debugger;
   User.create({
     username,

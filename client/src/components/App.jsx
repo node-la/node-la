@@ -106,12 +106,15 @@ class App extends React.Component {
   }
 
   // function to save new username to the db and set username state
-  userSignUp(username) {
+  userSignUp(username, hood) {
+    console.log(hood);
     this.setState({
       username: username,
+      neighborhood: hood
     })
     return axios.post('/signup', {
       'username': username,
+      hood,
     })
       .then(response => response)
       .catch(error => console.log(error))
