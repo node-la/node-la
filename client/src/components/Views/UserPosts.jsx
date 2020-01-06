@@ -1,9 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import { Typography, Paper, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,9 +33,9 @@ const UserPosts = ({ changeView, userPosts, changeCurrentPost }) => {
                     {post.title}
                   </Typography>
                   <Typography variant="body2">{post.body}</Typography>
-                  <Typography variant="body2"> 0 comments</Typography>
+                  <Typography variant="body2" style={{ color: '#00796b', fontWeight: "bolder" }}>Username</Typography>
                 </Grid>
-                <Typography variant="subtitle2" color="textSecondary">{post.createdAt}</Typography>
+                <Typography variant="subtitle2" color="textSecondary">{moment(post.createdAt).fromNow()}</Typography>
               </Grid>
             </Grid>
           </Paper>

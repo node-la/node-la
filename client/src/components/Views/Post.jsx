@@ -1,10 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { Button } from '@material-ui/core';
+import moment from 'moment';
 import Comment from '../Comment.jsx';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, Paper, Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Post = ({ changeView, currentPost, createComment }) => {
+const Post = ({ changeView, currentPost, createComment, comments, loggedIn }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -49,19 +47,22 @@ const Post = ({ changeView, currentPost, createComment }) => {
           <Paper className={classes.paper}>
             <Typography variant="h3" style={{ fontWeight: "bolder", textAlign: "center" }}>Post Title</Typography>
             <Typography variant="h6" color="primary" style={{ fontWeight: "bolder", textAlign: "right" }}>Username</Typography>
-            <Typography variant="subtitle2" color="textSecondary" style={{textAlign: "right" }}>Time of post</Typography>
-            <Typography variant="h6">Post body placeholder text</Typography>
-          </Paper>
+            <Typography variant="subtitle2" color="textSecondary" style={{ textAlign: "right" }}>{moment(currentPost.createdAt).fromNow()}</Typography>
+            <Typography variant="h6">{currentPost.postBody}</Typography>
+          </Paper></p>
         </Grid>
         {/* Button with dialog box for adding comments*/}
-        <Comment currentPost={currentPost} createComment={createComment} />
+        {loggedIn ? <Comment currentPost={currentPost} createComment={createComment} /> : null}
         {/* Comment layout goes here */}
+        {comments.map(comment => 
         <Grid item xs={12}>
           <Paper className={classes.comment}>
             <Typography variant="h6" color="primary" style={{ fontWeight: "bolder" }}>Username</Typography>
-            <Typography variant="body2">Comment 1 placeholder text</Typography>
+              <Typography variant="subtitle2" color="textSecondary">{moment(comment.createdAt).fromNow()}</Typography>
+            <Typography variant="body2">{comment.commentBody}</Typography>
           </Paper>
         </Grid>
+          )}
       </Grid>
     </div>
   );

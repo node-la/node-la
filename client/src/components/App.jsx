@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import NavBar from './NavBar.jsx';
+import Post from './Views/Post.jsx';
 import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
-import Post from './Views/Post.jsx';
+import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
 
 class App extends React.Component {
@@ -22,6 +22,7 @@ class App extends React.Component {
       username: '',
       userId: '',
       neighborhood: '',
+      hoodPosts: []
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -29,9 +30,11 @@ class App extends React.Component {
     this.getWeather = this.getWeather.bind(this);
     this.userSignUp = this.userSignUp.bind(this);
     this.createPost = this.createPost.bind(this);
+    this.getComments = this.getComments.bind(this);
     this.updateLogin = this.updateLogin.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
+    this.getHoodPosts = this.getHoodPosts.bind(this)
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
@@ -70,7 +73,7 @@ class App extends React.Component {
         console.log(response.data);
         //jill added ^
         this.setState({
-          posts: response.data,
+          posts: response.data.data.reverse(),
         })
       })
       .catch(error => console.log('failed to get all posts', error))
@@ -88,7 +91,7 @@ class App extends React.Component {
     })
       .then(response => {
         this.setState({
-          userPosts: response.data,
+          userPosts: response.data.data.reverse(),
         })
       })
       .catch(error => console.log('failed to get User Posts', error))
@@ -127,9 +130,6 @@ class App extends React.Component {
       'username': this.state.username,
     })
       .then(response => response)
-      .then(() => {
-        axios.get('/usersposts');
-      })
       .then(this.getAllPosts)
       .catch(error => console.log('failed to create post', error))
   }
@@ -138,17 +138,43 @@ class App extends React.Component {
   createComment(postId, comment){
     return axios.post('/comments', {
       'postId': postId,
-      'commentUserId': this.state.userId,
+      'userId': this.state.userId,
       'commentBody': comment,
       'commentVotes': 0,
     })
-      .then(response => console.log(response))
-      .catch(error => console.log('failed to create a comment', error))
+      .then(response => response)
+      .then(this.getComments(this.state.currentPost.id))
+      .catch(error => console.log(error))
   }
 
   // function to store all current comments in state for main post view
-  getComments(){
+  getComments(id){
+    return axios.get('comments', {
+      params: {
+        postId: id
+      }
+    })
+      .then(response => {
+        this.setState({
+          comments: response.data.data,
+        })
+      })
+      .catch(error => console.log(error))
+  }
 
+  // function to get all posts of a certain neighborhood
+  getHoodPosts(hoodName){
+    return axios.get('/neighborhoods/posts', {
+      params: {
+        hoodName: hoodName,
+      }
+    })
+      .then(response => {
+        this.setState({
+          hoodPosts: response.data.data,
+        })
+      })
+      .catch(error => console.log(error))
   }
 
   // function to change views
@@ -173,7 +199,6 @@ class App extends React.Component {
   }
   
   render() {
-    console.log(this.state.userId);
     const { view } = this.state;
     const { loggedIn } = this.state;
     return (
@@ -200,6 +225,7 @@ class App extends React.Component {
                 createPost={this.createPost}
                 posts={this.state.posts}
                 changeCurrentPost={this.changeCurrentPost}
+                getComments={this.getComments}
                 />;
             // userPosts shows posts from the user once logged in
             case 'userPosts':
@@ -210,13 +236,21 @@ class App extends React.Component {
                 </Typography>)
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
-              return <Neighborhoods changeView={this.changeView} />;
+              return <Neighborhoods 
+                changeView={this.changeView}
+                getHoodPosts={this.getHoodPosts} 
+                hoodPosts={this.state.hoodPosts}
+                changeCurrentPost={this.changeCurrentPost}
+                getComments={this.getComments}
+                />;
             // post view shows the post clicked on with it's comments
             case 'post':
               return <Post
               changeView={this.changeView}
               currentPost={this.state.currentPost}
               createComment={this.createComment}
+              comments={this.state.comments}
+              loggedIn={this.state.loggedIn}
               />;
           }
         })()}

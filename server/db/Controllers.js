@@ -297,7 +297,6 @@ const getComments = function (req, res, next) {
   })
     .then((response) => {
       res.status(200);
-      debugger;
       res.send(JSON.stringify({
         status: 'success',
         data: response,
