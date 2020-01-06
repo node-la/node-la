@@ -53,6 +53,7 @@ class App extends React.Component {
       .catch(error => {
         console.error('Failed to get posts', error);
       });
+      //setInterval(location.reload(), 5000)
   }
 
   // function to get the loacl weather when app renders
@@ -87,7 +88,7 @@ class App extends React.Component {
     })
       .then(response => {
         this.setState({
-          userPosts: response.data.data,
+          userPosts: response.data,
         })
       })
       .catch(error => console.log('failed to get User Posts', error))
@@ -126,6 +127,10 @@ class App extends React.Component {
       'username': this.state.username,
     })
       .then(response => response)
+      .then(() => {
+        axios.get('/usersposts');
+      })
+      .then(this.getAllPosts)
       .catch(error => console.log('failed to create post', error))
   }
 
