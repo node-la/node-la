@@ -209,10 +209,10 @@ const usersPosts = function (req, res, next) {
 
 //! READ POST
 const getPosts = function (req, res, next) {
-  const {userId} = req.query;
+  //const {userId} = req.query;
   Post.findAll({
     //jill added attributes array
-    attributes: ['title', 'postBody', 'createdAt', 'userPostId' ]
+    attributes: ['title', 'postBody', 'createdAt', 'userPostId']
   })
     .then((response) => {
       res.status(200);
@@ -223,11 +223,10 @@ const getPosts = function (req, res, next) {
       //   data: response,
       //   message: 'Here are all the posts!'
       // }));
-      return next();
+      //return next();
     })
     .catch(err => {
-      res.sendStatus(400);
-      console.log(err);
+      console.log('there was an error getting posts from the server', err);
       return next();
     });
 };
@@ -371,6 +370,10 @@ const getNeighborhoodsPosts = function(req, res, next) {
   })
 }
 
+const reloader = () => {
+    setTimeout(getPosts, 1000);
+}
+
 
 module.exports = {
   getNeighborhoodsPosts,
@@ -388,5 +391,6 @@ module.exports = {
   getComments,
   updateComment,
   deleteComment,
-  usersPosts
+  usersPosts,
+  reloader
 };

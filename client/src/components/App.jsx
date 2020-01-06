@@ -68,7 +68,7 @@ class App extends React.Component {
     return axios.get('/posts')
       .then(response => {
         console.log(response.data);
-        //jill added 
+        //jill added ^
         this.setState({
           posts: response.data,
         })
