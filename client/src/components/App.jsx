@@ -14,6 +14,7 @@ class App extends React.Component {
     this.state = {
       weather: {},
       currentPost: {},
+      currentPostId: '',
       posts: [],
       comments: [],
       userPosts: [],
@@ -85,6 +86,7 @@ class App extends React.Component {
       }
     })
       .then(response => {
+        console.log(response);
         this.setState({
           userPosts: response.data.data,
         })
@@ -142,7 +144,7 @@ class App extends React.Component {
 
   // function to store all current comments in state for main post view
   getComments(){
-    
+
   }
 
   // function to change views
@@ -153,9 +155,10 @@ class App extends React.Component {
   }
 
   // function to change currentPost state for main post view
-  changeCurrentPost(post) {
+  changeCurrentPost(post, id) {
     this.setState({
-      currentPost: post
+      currentPost: post,
+      currentPostId: id,
     })
   }
   
@@ -167,7 +170,7 @@ class App extends React.Component {
   }
   
   render() {
-    console.log(this.state.userId);
+    console.log(this.state);
     const { view } = this.state;
     const { loggedIn } = this.state;
     return (

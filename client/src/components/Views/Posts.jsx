@@ -35,7 +35,7 @@ const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost }) =
             <Grid item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                   <Typography gutterBottom id={index} variant="h5" style={{ cursor: 'pointer' }} 
-                  onClick={() => { changeView("post"), changeCurrentPost(posts[index]) }}>
+                  onClick={() => { changeView("post"), changeCurrentPost(posts[index], posts[index].id) }}>
                     {post.title}
                   </Typography>
                   <Typography variant="body2">{post.body}</Typography>

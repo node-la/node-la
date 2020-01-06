@@ -47,6 +47,11 @@ User.hasMany(Comment, {
   constraints: false
 });
 
+Post.belongsTo(User);
+
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
+
 //Sync the Models to construct the database tables
 User.sync({ force: true })
   .then(() => console.log('Users synced!'));
