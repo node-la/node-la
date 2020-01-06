@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@material-ui/core';
+import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button, Select } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +16,7 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
   //user react hooks to set temp state of username
   const [open, setOpen] = React.useState(false);
   const [usernameValue, setUsernameValue] = useState('')
+  const [hoodValue, setHoodValue] = useState('')
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,16 +37,19 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
             <DialogTitle id="form-dialog-title"> Login </DialogTitle>
             {/* text fields in dialog box */}
             <DialogContent>
-          <TextField id="username" label="Username" type="username" 
-            value={usernameValue}
-            onChange={(e) => setUsernameValue(e.target.value)} fullWidth />
+              <TextField id="username" label="Username" type="username" 
+                value={usernameValue}
+                onChange={(e) => setUsernameValue(e.target.value)} fullWidth />
+              <TextField id="hood" label="Neighborhood" type="hood" 
+                value={hoodValue}
+                onChange={(e) => setHoodValue(e.target.value)} fullWidth />
               <TextField id="password" label="Password" type="password" fullWidth />
             </DialogContent>
             {/* buttons in dialog box */}
             <DialogActions>
               <Button onClick={handleClose} color="primary">Cancel</Button>
-          <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue) }} color="primary">Login</Button>
-          <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue); }} color="primary">Sign Up</Button>
+              <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue) }} color="primary">Login</Button>
+              <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue); }} color="primary">Sign Up</Button>
             </DialogActions>
           </Dialog>
     </div>
