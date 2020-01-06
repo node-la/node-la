@@ -4,6 +4,11 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: false,
       unique: true
+    },
+    neighborhood: {
+      type: type.STRING,
+      allowNull: true,
+      unique: false
     }
   });
 };
