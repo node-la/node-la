@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import PersonIcon from '@material-ui/icons/Person';
+import SpaIcon from '@material-ui/icons/Spa';
 import Weather from './Weather.jsx';
 
 const StyledMenu = withStyles({
@@ -79,7 +80,13 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo }) => {
           </ListItemIcon>
           <ListItemText primary="User" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("neighborhoods")}}>
+        <StyledMenuItem onClick={() => {changeView("userHood")}}>
+          <ListItemIcon>
+            <SpaIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="My Neighborhood" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => {changeView("userHood")}}>
           <ListItemIcon>
             <HomeWorkIcon fontSize="small" />
           </ListItemIcon>
