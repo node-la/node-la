@@ -11,11 +11,12 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: 700,
   },
 }));
+
 
 const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost }) => {
   //use given style from above

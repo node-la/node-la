@@ -1,10 +1,13 @@
 const ctrl = require('./db/Controllers');
 const axios = require('axios');
 const { weatherKey } = require('../config');
+
 /*
 This file routes the client requests at a specific endpoint to a handling
-function.
+function
 */
+
+
 module.exports = function (app, express) {
   //login to an account/get a single user
   app.post('/signup', ctrl.createUser);
@@ -26,6 +29,8 @@ module.exports = function (app, express) {
   app.get('/comments', ctrl.getComments);
   //get all posts for a neighborhood
   app.get('/neighborhoods/posts', ctrl.getNeighborhoodsPosts);
+
+  //app.get('/fresh', ctrl.reloader);
 
   //darksky current weather api request
   app.get('/weather', (req, res) => {

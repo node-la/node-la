@@ -49,8 +49,11 @@ User.hasMany(Comment, {
 
 Post.belongsTo(User);
 
-Post.hasMany(Comment);
-Comment.belongsTo(Post);
+//Set Table Associations before initialization, be mindful of order
+User.hasMany(Post, {
+  foreignKey: 'userPostId',
+  constraints: false
+});
 
 //Sync the Models to construct the database tables
 User.sync({ force: true })

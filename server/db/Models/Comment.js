@@ -4,13 +4,13 @@ Sequelize utilizes models to define tables in a database, each model is construc
 */
 module.exports = (sequelize, type) => {
   return sequelize.define('comment', {
-    commentUserId: {
-      type: type.INTEGER,
-      //allowNull: false,
-    },
+    // commentUserName: {
+    //   type:type.STRING,
+    //   allowNull: false
+    // },
     commentBody: {
       type: type.STRING,
-      allowNull: false,
+      allowNull: false
     },
     commentVotes: {
       type: type.INTEGER,

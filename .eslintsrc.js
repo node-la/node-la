@@ -1,14 +1,26 @@
 
+/*
+oddly, the sourceType command is not working
+https://www.freecodecamp.org/news/the-essentials-eslint/
+*/
 module.exports = {
-  env: {
-    'es6': true
-  },
-  parserOptions: {
-    ecmaFeatures: {
-      'jsx': true
-    }
-  },
-  rules: {
+  'root': true,
+  'parserOptions': {
+    'ecmaFeatures': {
+        'jsx': true,
+        'modules': true,
+        'spread': true,
+        'restParams': true
+    },
+    'env' : {
+        'browser' : true,
+        'node' : true,
+        'es6' : true
+    },
+    'sourceType': 'module'
+},
+'extends': ['airbnb', 'airbnb/hooks'],
+  'rules': {
     /* Indentation */
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
@@ -35,6 +47,8 @@ module.exports = {
     'space-infix-ops': 1,
     /* Minuta */
     'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
+    'quotes': [1, 'single'],
+    'no-unused-vars': 2,
+    'no-undef': 2
   }
 };
