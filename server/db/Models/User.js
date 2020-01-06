@@ -5,7 +5,7 @@ module.exports = (sequelize, type) => {
       allowNull: false,
       unique: true
     },
-    neighborhood: {
+    hood: {
       type: type.STRING,
       allowNull: true,
       unique: false

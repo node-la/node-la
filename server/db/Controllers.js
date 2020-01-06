@@ -8,12 +8,13 @@ const app = express(feathers());
 //create & save a user to the db
 // !CREATE USER
 const createUser = function (req, res, next) {
-  const username = req.body.username; // Grab username from req body
+  const { username, hood } = req.body; // Grab username and hood from req body
   const id = req.body.id; // Grab password from req body
   // debugger;
   User.create({
-    username: username,
-    id: id
+    username,
+    hood,
+    id,
   })
     .then((data) => {
       res.status(201).json({ // Send 201 status upon success.
