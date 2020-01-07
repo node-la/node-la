@@ -100,8 +100,12 @@ class App extends React.Component {
   userLogin(username) {
     return axios.get(`/users/${username}`)
       .then(response => {
+        const { userId, username, hood } = response.data.data[0];
+        console.log(response.data.data[0]);
         this.setState({
-          userId: response.data.data[0].id,
+          userId,
+          username,
+          neighborhood: hood
         })
       })
       .catch(error => console.log(error))
