@@ -9,7 +9,6 @@ const app = express(feathers());
 // !CREATE USER
 const createUser = function (req, res, next) {
   const { username, hood, id } = req.body; // Grab username, id, and hood from req body
-  console.log(req.body)
   // debugger;
   User.create({
     username,
@@ -65,11 +64,24 @@ const getUsers = function (req, res, next) {
       }));
       return next();
     })
-    .catch(err => {
+    .catch(() => {
       res.status(400);
       return next();
     });
 };
+
+// get all users from a given neighborhood
+const getHoodUsers = (req, res, next) => {
+  const { hood } = req.params
+  User.findAll({ where: { hood: hood } })
+    .then((users) => {
+      console.log(users);
+      res.send(users);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
 
 //Update User
 //! UPDATE
@@ -368,6 +380,7 @@ module.exports = {
   createUser,
   getSingleUser,
   getUsers,
+  getHoodUsers,
   updateUser,
   deleteUser,
   createPost,
