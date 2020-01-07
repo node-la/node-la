@@ -212,7 +212,10 @@ class App extends React.Component {
           }
         })
           .then((response) => {
-            console.log(response.data.data)
+            const neighborPosts = response.data.data;
+            this.setState({
+              neighborPosts
+            })
           })
           .then(() => {
             this.changeView('neighbor')
@@ -260,7 +263,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { view, neighbors } = this.state;
+    const { view, neighbors, neighbor, neighborPosts } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -306,7 +309,7 @@ class App extends React.Component {
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                <Neighbor />
+                <Neighbor neighbor={neighbor} neighborPosts={neighborPosts}/>
               )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
