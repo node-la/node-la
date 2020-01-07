@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Card, CardContent, Typography } from '@material-ui/core';
+import { Container, Card, CardContent, Typography, Button } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -32,19 +32,21 @@ const useStyles = makeStyles(theme => ({
 const UserHood = ({ changeView, userPosts, neighbors }) => {
   const classes = useStyles();
   return (
-    <Container className={classes.root}>
+    <div>
       {neighbors.map((neighbor) => {  
-        {console.log(neighbor)}
         return (
+        <Container className={classes.root}>
+          {console.log(neighbor)}
           <Card className={classes.card}>
-            <CardContent>
-              <Typography component="h2">{neighbor.username}</Typography>
-              <Typography>{neighbor.username}</Typography>
-            </CardContent>
-          </Card>
+              <CardContent>
+                <Button size="large" fullWidth="true" variant="text" style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}>{neighbor.username}</Button>
+                <Typography align="center">here's my bio!</Typography>
+              </CardContent>
+            </Card>
+          </Container>
         )
       })}
-    </Container>
+    </div>
   )
 }
 

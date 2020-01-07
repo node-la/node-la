@@ -269,7 +269,7 @@ class App extends React.Component {
             case 'userHood':
               return (
                 neighbors.length > 0 ? <UserHood neighbors={neighbors} changeView={this.changeView} userPosts={this.state.userPosts} />
-                  : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
+                  : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
             // neighborhoods shows posts based on what neighborhood is selected
