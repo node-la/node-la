@@ -36,6 +36,7 @@ class App extends React.Component {
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
+    this.getNeighbors = this.getNeighbors.bind(this)
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
@@ -163,6 +164,18 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  // get all users in a given neighborhood (except current user?)
+  getNeighbors(hood) {
+    console.log('heyyyyy');
+    axios.get(`/users/hood/${hood}`)
+      .then(() => {
+        console.log('woop');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   // function to get all posts of a certain neighborhood
   getHoodPosts(hoodName){
     return axios.get('/neighborhoods/posts', {
@@ -237,7 +250,11 @@ class App extends React.Component {
                 </Typography>)
             // userHood shows all users from a given neighborhood
             case 'userHood':
-              return <UserHood/>
+              return (
+                loggedIn ? <UserHood changeView={this.changeView} getNeighbors={this.getNeighbors} userPosts={this.state.userPosts} />
+                  : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
+                    You're the only one in the neighborhood...
+                </Typography>)
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
               return <Neighborhoods 
