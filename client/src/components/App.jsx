@@ -171,10 +171,15 @@ class App extends React.Component {
   // get all users in a given neighborhood (except current user?)
   getNeighbors() {
     const { neighborhood } = this.state;
-    console.log('heyyyyy');
     axios.get(`/users/hood/${neighborhood}`)
       .then((response) => {
-        console.log(response);
+        // filter response data to not include current logged in user
+        const filteredResponse = response.data.filter((neighbor) => {
+          return neighbor.username !== this.state.username;
+        })
+        this.setState({
+          neighbors: filteredResponse,
+        })
       })
       .catch((err) => {
         console.log(err);
