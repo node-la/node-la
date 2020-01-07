@@ -75,30 +75,35 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </StyledMenuItem>
+
         <StyledMenuItem onClick={() => { changeView("profile"); }}>
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Your Profile" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("userPosts")}}>
+
+        <StyledMenuItem onClick={() => { changeView("userPosts") }}>
           <ListItemIcon>
             <LibraryBooksIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Your Posts" />
         </StyledMenuItem>
+
         <StyledMenuItem onClick={() => { getNeighbors() }}>
           <ListItemIcon>
             <SpaIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="My Neighborhood" />
         </StyledMenuItem>
+
         <StyledMenuItem onClick={() => { changeView("neighborhoods"); }}>
           <ListItemIcon>
             <HomeWorkIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Neighborhoods" />
         </StyledMenuItem>
+        
         {/* Drop down weather widget */}
         <Weather weatherIcon={weatherIcon} weatherInfo={weatherInfo}/>
       </StyledMenu>
