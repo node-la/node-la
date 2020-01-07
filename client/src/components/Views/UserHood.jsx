@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemIcon, ListItemText, Container } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText, Container, Card, CardContent } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -9,11 +9,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-  },
-  list: {
-    padding: theme.spacing(3),
-    margin: 'auto',
-    maxWidth: 700,
+    marginTop: theme.spacing(3),
+    borderRadius: 3,
+    borderShadow: 3,
   },
 }));
 
@@ -21,20 +19,24 @@ const UserHood = () => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
-      <List className={classes.list} component="nav" aria-label="contacts">
-        <ListItem button>
-          <ListItemIcon>
-            <FaceIcon />
-          </ListItemIcon>
-          <ListItemText primary="Chelsea Otakan" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <FaceIcon />
-          </ListItemIcon>
-          <ListItemText inset primary="Eric Hoffman" />
-        </ListItem>
-      </List>
+      <Card>
+        <CardContent>
+          <List component="nav" aria-label="neighbors">
+            <ListItem button>
+              <ListItemIcon>
+                <FaceIcon />
+              </ListItemIcon>
+              <ListItemText primary="Chelsea Otakan" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <FaceIcon />
+              </ListItemIcon>
+              <ListItemText inset primary="Eric Hoffman" />
+            </ListItem>
+          </List>
+        </CardContent>
+      </Card>
     </Container>
   )
 }
