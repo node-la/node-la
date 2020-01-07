@@ -223,7 +223,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { view } = this.state;
+    const { view, neighbors } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -262,7 +262,7 @@ class App extends React.Component {
             // userHood shows all users from a given neighborhood
             case 'userHood':
               return (
-                loggedIn ? <UserHood changeView={this.changeView} userPosts={this.state.userPosts} />
+                neighbors.length > 0 ? <UserHood neighbors={neighbors} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
