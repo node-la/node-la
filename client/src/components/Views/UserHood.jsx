@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UserHood = ({ changeView, userPosts, neighbors }) => {
+const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   const classes = useStyles();
   return (
     <div>
@@ -39,7 +39,14 @@ const UserHood = ({ changeView, userPosts, neighbors }) => {
           {console.log(neighbor)}
           <Card className={classes.card}>
               <CardContent>
-                <Button size="large" fullWidth="true" variant="text" style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}>{neighbor.username}</Button>
+                <Button 
+                  size="large" 
+                  fullWidth="true" 
+                  variant="text" 
+                  style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
+                  neighbor={neighbor}
+                  onClick={() => {getNeighbor(neighbor.username)}}
+                >{neighbor.username}</Button>
                 <Typography align="center">here's my bio!</Typography>
               </CardContent>
             </Card>

@@ -25,6 +25,7 @@ class App extends React.Component {
       neighborhood: '',
       hoodPosts: [],
       neighbors: [],
+      neighbor: []
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -38,6 +39,7 @@ class App extends React.Component {
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
     this.getNeighbors = this.getNeighbors.bind(this)
+    this.getNeighbor = this.getNeighbor.bind(this)
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
@@ -172,7 +174,7 @@ class App extends React.Component {
   // called in MenuList when user clicks on My Neighborhood dropdown item
   getNeighbors() {
     const { neighborhood } = this.state;
-    axios.get(`/users/hood/${neighborhood}`)
+    axios.get(`/neighbors/${neighborhood}`)
       .then((response) => {
         // filter response data to not include current logged in user
         const filteredResponse = response.data.filter((neighbor) => {
@@ -190,6 +192,13 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  // get info for a specific neighbor to render in Neighbor component
+  // called when user clicks on a neighbor name in the Neighborhood view
+  getNeighbor(neighbor) {
+    console.log('click');
+    // axios.get(`/neighbors/${neighbor}`);
   }
 
   // function to get all posts of a certain neighborhood
@@ -268,7 +277,7 @@ class App extends React.Component {
             // userHood shows all users from a given neighborhood
             case 'userHood':
               return (
-                neighbors.length > 0 ? <UserHood neighbors={neighbors} changeView={this.changeView} userPosts={this.state.userPosts} />
+                neighbors.length > 0 ? <UserHood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
