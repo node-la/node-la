@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { List, ListItem, ListItemIcon, ListItemText, Container, Card, CardContent } from '@material-ui/core';
+import { Container, Card, CardContent, Typography } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -13,30 +13,37 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 3,
     borderShadow: 3,
   },
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 }));
 
-const UserHood = ({ changeView, userPosts }) => {
+const UserHood = ({ changeView, userPosts, neighbors }) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
-      <Card>
-        <CardContent>
-          <List component="nav" aria-label="neighbors">
-            <ListItem button>
-              <ListItemIcon>
-                <FaceIcon />
-              </ListItemIcon>
-              <ListItemText primary="Chelsea Otakan" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <FaceIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Eric Hoffman" />
-            </ListItem>
-          </List>
-        </CardContent>
-      </Card>
+      {neighbors.map((neighbor) => {  
+        {console.log(neighbor)}
+        return (
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography component="h2">{neighbor.username}</Typography>
+              <Typography>{neighbor.username}</Typography>
+            </CardContent>
+          </Card>
+        )
+      })}
     </Container>
   )
 }

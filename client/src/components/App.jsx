@@ -169,6 +169,7 @@ class App extends React.Component {
   }
 
   // get all users in a given neighborhood (except current user?)
+  // called in MenuList when user clicks on My Neighborhood dropdown item
   getNeighbors() {
     const { neighborhood } = this.state;
     axios.get(`/users/hood/${neighborhood}`)
@@ -177,9 +178,14 @@ class App extends React.Component {
         const filteredResponse = response.data.filter((neighbor) => {
           return neighbor.username !== this.state.username;
         })
+        // set the filtered neighbors onto state
         this.setState({
           neighbors: filteredResponse,
         })
+      })
+      // then call changeView to change the view
+      .then(() => {
+        this.changeView("userHood");
       })
       .catch((err) => {
         console.log(err);

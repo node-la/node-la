@@ -80,7 +80,7 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
           </ListItemIcon>
           <ListItemText primary="User" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => { getNeighbors(); changeView("userHood") }}>
+        <StyledMenuItem onClick={() => { getNeighbors() }}>
           <ListItemIcon>
             <SpaIcon fontSize="small" />
           </ListItemIcon>
