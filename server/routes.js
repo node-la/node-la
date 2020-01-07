@@ -1,6 +1,6 @@
 const ctrl = require('./db/Controllers');
 const axios = require('axios');
-const { weatherKey } = require('./config');
+const { weatherKey } = require('./db/config.js');
 
 /*
 This file routes the client requests at a specific endpoint to a handling
