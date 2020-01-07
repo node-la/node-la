@@ -39,7 +39,7 @@ const StyledMenuItem = withStyles(theme => ({
   },
 }))(MenuItem);
 
-const MenuList = ({ changeView, weatherIcon, weatherInfo }) => {
+const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   //target clicked element on menu
   const handleClick = event => {
@@ -80,13 +80,13 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo }) => {
           </ListItemIcon>
           <ListItemText primary="User" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("userHood")}}>
+        <StyledMenuItem onClick={() => { getNeighbors(); changeView("userHood") }}>
           <ListItemIcon>
             <SpaIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="My Neighborhood" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("userHood")}}>
+        <StyledMenuItem onClick={() => { changeView("neighborhoods"); }}>
           <ListItemIcon>
             <HomeWorkIcon fontSize="small" />
           </ListItemIcon>

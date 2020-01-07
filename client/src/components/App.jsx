@@ -165,10 +165,12 @@ class App extends React.Component {
   }
 
   // get all users in a given neighborhood (except current user?)
-  getNeighbors(hood) {
+  getNeighbors() {
+    const { neighborhood } = this.state;
     console.log('heyyyyy');
-    axios.get(`/users/hood/${hood}`)
-      .then(() => {
+    axios.get(`/users/hood/${neighborhood}`)
+      .then((response) => {
+        console.log(response);
         console.log('woop');
       })
       .catch((err) => {
@@ -227,6 +229,7 @@ class App extends React.Component {
           userSignUp={this.userSignUp}
           userLogin={this.userLogin}
           getUserPosts={this.getUserPosts}
+          getNeighbors={this.getNeighbors}
         />
         {/* Post view changes base on state */}
         {(() => {
@@ -251,7 +254,7 @@ class App extends React.Component {
             // userHood shows all users from a given neighborhood
             case 'userHood':
               return (
-                loggedIn ? <UserHood changeView={this.changeView} getNeighbors={this.getNeighbors} userPosts={this.state.userPosts} />
+                loggedIn ? <UserHood changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)

@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UserHood = () => {
+const UserHood = ({ changeView, userPosts }) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
