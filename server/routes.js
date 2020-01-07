@@ -13,8 +13,8 @@ module.exports = function (app, express) {
   app.get('/users/:username', ctrl.getSingleUser);
   //get all users
   app.get('/users', ctrl.getUsers);
-  // get all users in a given neighrborhood
-  app.get('/users/hood/:hood', ctrl.getHoodUsers);
+  // get all users in a given neighrborhood/neighbors of the logged in user
+  app.get('/neighbors/:hood', ctrl.getNeighbors);
   //create a post
   app.post('/posts', ctrl.createPost);
   // get all the posts

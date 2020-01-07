@@ -71,7 +71,7 @@ const getUsers = function (req, res, next) {
 };
 
 // get all users from a given neighborhood
-const getHoodUsers = (req, res, next) => {
+const getNeighbors = (req, res, next) => {
   const { hood } = req.params
   User.findAll({ where: { hood: hood } })
     .then((users) => {
@@ -380,7 +380,7 @@ module.exports = {
   createUser,
   getSingleUser,
   getUsers,
-  getHoodUsers,
+  getNeighbors,
   updateUser,
   deleteUser,
   createPost,
