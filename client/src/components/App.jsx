@@ -309,7 +309,7 @@ class App extends React.Component {
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                <Neighbor neighbor={neighbor} neighborPosts={neighborPosts}/>
+                <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost}/>
               )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
