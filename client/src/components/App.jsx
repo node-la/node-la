@@ -3,6 +3,7 @@ import axios from 'axios';
 import Post from './Views/Post.jsx';
 import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
+import UserHood from './Views/UserHood.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
 import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
@@ -234,6 +235,9 @@ class App extends React.Component {
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                   Please Login to see your posts!
                 </Typography>)
+            // userHood shows all users from a given neighborhood
+            case 'userHood':
+              return <UserHood/>
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
               return <Neighborhoods 
