@@ -33,19 +33,19 @@ const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   const classes = useStyles();
   return (
     <div>
+      <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>Meet your neighbors:</Typography>
       {neighbors.map((neighbor) => {  
         return (
         <Container className={classes.root}>
-          {console.log(neighbor)}
-          <Card className={classes.card}>
+          {console.log(neighbor.username)}
+          <Card className={classes.card} key={neighbor.id}>
               <CardContent>
                 <Button 
                   size="large" 
                   fullWidth="true" 
                   variant="text" 
                   style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
-                  neighbor={neighbor}
-                  onClick={() => {getNeighbor(neighbor.username)}}
+                  onClick={() => getNeighbor(neighbor.username)}
                 >{neighbor.username}</Button>
                 <Typography align="center">here's my bio!</Typography>
               </CardContent>

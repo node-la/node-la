@@ -5,6 +5,7 @@ import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
 import UserHood from './Views/UserHood.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
+import Neighbor from './Views/Neighbor.jsx';
 import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
 
@@ -20,12 +21,13 @@ class App extends React.Component {
       userPosts: [],
       view: 'posts',
       loggedIn: false,
-      username: '',
+      username: 'you',
       userId: '',
-      neighborhood: '',
+      neighborhood: 'Fountainbleu',
       hoodPosts: [],
       neighbors: [],
-      neighbor: []
+      neighbor: '',
+      neighborPosts: [],
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -88,7 +90,7 @@ class App extends React.Component {
     })
     return axios.get(`/usersposts`, {
       params: {
-        'username': username
+        username,
       }
     })
       .then(response => {
@@ -197,8 +199,28 @@ class App extends React.Component {
   // get info for a specific neighbor to render in Neighbor component
   // called when user clicks on a neighbor name in the Neighborhood view
   getNeighbor(neighbor) {
-    console.log('click');
-    // axios.get(`/neighbors/${neighbor}`);
+    return axios.get(`/users/${neighbor}`)
+      .then((response) => {
+        const neighbor = response.data.data[0].username;
+        this.setState({
+          neighbor,
+        })
+        console.log(neighbor);
+        axios.get(`/usersposts`, {
+          params: {
+            username: neighbor
+          }
+        })
+          .then((response) => {
+            console.log(response.data.data)
+          })
+          .then(() => {
+            this.changeView('neighbor')
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   // function to get all posts of a certain neighborhood
@@ -281,6 +303,11 @@ class App extends React.Component {
                   : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
+            // neighbor shows a particular neighbor
+            case 'neighbor':
+              return (
+                <Neighbor />
+              )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
               return <Neighborhoods 
