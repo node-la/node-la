@@ -3,6 +3,7 @@ import axios from 'axios';
 import Post from './Views/Post.jsx';
 import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
+import UserProfile from './Views/UserProfile.jsx';
 import UserHood from './Views/UserHood.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
 import Neighbor from './Views/Neighbor.jsx';
@@ -283,6 +284,8 @@ class App extends React.Component {
         {(() => {
           switch (view) {
             // posts view shows all posts
+            case 'profile':
+              return <UserProfile />
             case 'posts':
               return <Posts 
                 changeView={this.changeView}
