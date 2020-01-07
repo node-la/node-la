@@ -7,6 +7,7 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import PersonIcon from '@material-ui/icons/Person';
 import SpaIcon from '@material-ui/icons/Spa';
 import Weather from './Weather.jsx';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
 const StyledMenu = withStyles({
   paper: {
@@ -74,11 +75,17 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("userPosts")}}>
+        <StyledMenuItem onClick={() => { changeView("profile"); }}>
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="User" />
+          <ListItemText primary="Your Profile" />
+        </StyledMenuItem>
+        <StyledMenuItem onClick={() => {changeView("userPosts")}}>
+          <ListItemIcon>
+            <LibraryBooksIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Your Posts" />
         </StyledMenuItem>
         <StyledMenuItem onClick={() => { getNeighbors() }}>
           <ListItemIcon>
