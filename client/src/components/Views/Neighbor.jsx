@@ -29,8 +29,7 @@ const Neighbor = ({ neighbor, neighborPosts, changeView, changeCurrentPost }) =>
               </Grid>
               <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>
-                  <Typography gutterBottom id={index} variant="h5" style={{ cursor: 'pointer' }}
-                    onClick={() => { changeView("post"), changeCurrentPost(neighboPosts[index]), getComments(post.id) }}>
+                  <Typography gutterBottom id={index} variant="h5">
                     {post.title}
                   </Typography>
                   <Typography variant="body2">{post.body}</Typography>
