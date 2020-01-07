@@ -101,7 +101,6 @@ class App extends React.Component {
     return axios.get(`/users/${username}`)
       .then(response => {
         const { userId, username, hood } = response.data.data[0];
-        console.log(response.data.data[0]);
         this.setState({
           userId,
           username,
