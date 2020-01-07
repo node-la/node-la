@@ -23,7 +23,8 @@ class App extends React.Component {
       username: '',
       userId: '',
       neighborhood: '',
-      hoodPosts: []
+      hoodPosts: [],
+      neighbors: [],
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -174,7 +175,6 @@ class App extends React.Component {
     axios.get(`/users/hood/${neighborhood}`)
       .then((response) => {
         console.log(response);
-        console.log('woop');
       })
       .catch((err) => {
         console.log(err);
