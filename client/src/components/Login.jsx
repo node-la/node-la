@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 140,
   }
 }));
 
@@ -71,8 +71,8 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts, changeView })
                 value={usernameValue}
                 onChange={(e) => setUsernameValue(e.target.value)} fullWidth />
           {/* selection for neighborhoods */}
-          <FormControl className={classes.formControl}>
-            <InputLabel id="hood-select-label">Neighborhood: required input!</InputLabel>
+          <FormControl required className={classes.formControl}>
+            <InputLabel id="hood-select-label">Neighborhood</InputLabel>
             <Select
               labelId="hood-select-label"
               label="Neighborhood"

@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+  },
   button: {
     background: 'linear-gradient(45deg, #00796b 30%, #43a047 90%)',
     borderRadius: 4,
