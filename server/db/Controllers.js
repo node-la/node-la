@@ -232,7 +232,9 @@ const usersPosts = function (req, res, next) {
     }));
     return next();
   })
-  .catch()
+  .catch((error) => {
+    console.log(error);
+  })
 }
 //! READ POST
 const getPosts = function (req, res, next) {
