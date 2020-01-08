@@ -265,8 +265,15 @@ class App extends React.Component {
   }
 
   // allows user to add and change their bio
-  updateUserBio(bio) {
-    console.log(bio);
+  updateUserBio(newBio) {
+    const { username } = this.state;
+    axios.post('/users/bio', { username, newBio })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error => {
+        console.log(error);
+      }))
   }
   
   render() {
