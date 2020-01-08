@@ -3,6 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Dialog, DialogActions, DialogContent, 
           DialogTitle, Button, Select, FormControl, 
           InputLabel, MenuItem } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+// import SelectNeighborhoodPopup from './Views/SelectNeighborhoodPopup.jsx'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,6 +43,19 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts, changeView })
     setHood(event.target.value);
   };
 
+  // handle user signup to check for neighborhood value
+  // TODO: implement in a way that makes neighborhood required
+  const handleSignUp = (usernameValue, hood) => {
+    // if (!hood.length) {
+    //   // TODO: add popup or snackbar to let user know that a neighborhood is required
+    // } else {
+      updateLogin();
+      userSignUp(usernameValue, hood);
+      handleClose();
+    // }
+  }
+
+
   // console.log(usernameValue);
 
   return (
@@ -53,7 +72,7 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts, changeView })
                 onChange={(e) => setUsernameValue(e.target.value)} fullWidth />
           {/* selection for neighborhoods */}
           <FormControl className={classes.formControl}>
-            <InputLabel id="hood-select-label">Neighborhood</InputLabel>
+            <InputLabel id="hood-select-label">Neighborhood: required input!</InputLabel>
             <Select
               labelId="hood-select-label"
               label="Neighborhood"
@@ -83,7 +102,7 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts, changeView })
             <DialogActions>
               <Button onClick={handleClose} color="primary">Cancel</Button>
               <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue); changeView('posts') }} color="primary">Login</Button>
-              <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue, hood); }} color="primary">Sign Up</Button>
+              <Button onClick={() => { handleSignUp(usernameValue, hood); }} color="primary">Sign Up</Button>
             </DialogActions>
           </Dialog>
     </div>
