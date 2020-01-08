@@ -25,14 +25,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const UserProfile = () => {
+const UserProfile = ({updateUserBio}) => {
   const classes = useStyles();
   return (
     <div>
       <Paper aria-labelledby="form-title" className={classes.paper}>
         <FormLabel className="formLabel" id="form-dialog-title"> Edit your bio </FormLabel>
           <TextField id="bio" label="Bio" type="bio" fullWidth />
-          <Button className={classes.button} color="primary">Save</Button>
+        <Button className={classes.button} color="primary" onClick={updateUserBio}>Save</Button>
       </Paper>
     </div>
   )

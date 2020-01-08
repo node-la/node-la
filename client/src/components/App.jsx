@@ -38,6 +38,7 @@ class App extends React.Component {
     this.createPost = this.createPost.bind(this);
     this.getComments = this.getComments.bind(this);
     this.updateLogin = this.updateLogin.bind(this);
+    this.updateUserBio = this.updateUserBio.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
@@ -262,6 +263,11 @@ class App extends React.Component {
       loggedIn: !this.state.loggedIn,
     });
   }
+
+  // allows user to add and change their bio
+  updateUserBio() {
+    console.log('clicked');
+  }
   
   render() {
     const { view, neighbors, neighbor, neighborPosts } = this.state;
@@ -285,7 +291,7 @@ class App extends React.Component {
           switch (view) {
             // posts view shows all posts
             case 'profile':
-              return <UserProfile />
+              return <UserProfile updateUserBio={this.updateUserBio}/>
             case 'posts':
               return <Posts 
                 changeView={this.changeView}
