@@ -287,7 +287,7 @@ class App extends React.Component {
         console.log(response);
       })
       .catch((error) => {
-        console.log(eror);
+        console.log(error);
       })
   }
   
@@ -359,7 +359,7 @@ class App extends React.Component {
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
+                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} getNeighbors={this.getNeighbors} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
                   : <div>
                     <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
                     <Button
