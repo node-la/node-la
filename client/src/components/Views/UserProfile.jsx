@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormControl, FormLabel, Button, Paper, Input, InputLabel, Container, TextField } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { Snackbar, FormLabel, Button, Paper, TextField } from '@material-ui/core';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,12 +33,31 @@ const useStyles = makeStyles(theme => ({
 const UserProfile = ({updateUserBio}) => {
   const classes = useStyles();
   const [bio, setUserBio] = useState('');
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+    () => updateUserBio(bio);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div>
       <Paper aria-labelledby="form-title" className={classes.paper}>
         <FormLabel className="formLabel" id="form-dialog-title"> Edit your bio </FormLabel>
           <TextField id="bio" label="Bio" type="bio" value={bio} onChange={(e) => setUserBio(e.target.value)} fullWidth />
-        <Button className={classes.button} color="primary" onClick={() => updateUserBio(bio)}>Save</Button>
+        <Button className={classes.button} color="primary" onClick={handleClick}>Save</Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} color="success">
+            Bio saved!
+          </Alert>
+        </Snackbar>
       </Paper>
     </div>
   )
