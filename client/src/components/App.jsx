@@ -40,6 +40,7 @@ class App extends React.Component {
     this.getComments = this.getComments.bind(this);
     this.updateLogin = this.updateLogin.bind(this);
     this.updateUserBio = this.updateUserBio.bind(this);
+    this.updateUserHood = this.updateUserHood.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
@@ -277,6 +278,12 @@ class App extends React.Component {
         console.log(error);
       }))
   }
+
+  // allows user to change their neighborhood
+  updateUserHood(newHood) {
+    const { username } = this.state;
+    console.log(newHood);
+  }
   
   render() {
     const { view, neighbors, neighbor, neighborhood, neighborPosts, username } = this.state;
@@ -301,7 +308,7 @@ class App extends React.Component {
             // posts view shows all posts
             case 'profile':
               return (
-                loggedIn ? <UserProfile updateUserBio={this.updateUserBio}/>
+                loggedIn ? <UserProfile updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
                   : <Typography variant="h5" style={{ textAlign: "center", color: "white" }}>
                     Please log in to see your profile
                 </Typography>

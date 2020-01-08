@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const UserProfile = ({updateUserBio}) => {
+const UserProfile = ({updateUserBio, updateUserHood}) => {
   const classes = useStyles();
   const [bio, setUserBio] = useState('');
   const [hood, setHood] = useState('');
@@ -54,7 +54,7 @@ const UserProfile = ({updateUserBio}) => {
   };
 
   const handleHoodClick = () => {
-    console.log('clicked');
+    updateUserHood(hood);
   }
 
   return (
