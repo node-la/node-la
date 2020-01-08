@@ -63,11 +63,6 @@ const UserProfile = ({updateUserBio, updateUserHood}) => {
         <FormLabel className="formLabel" id="form-dialog-title"> Edit your bio </FormLabel>
           <TextField id="bio" label="Bio" type="bio" value={bio} onChange={(e) => setUserBio(e.target.value)} fullWidth />
         <Button className={classes.button} color="primary" onClick={handleBioClick}>Save</Button>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} color="success">
-            Bio saved!
-          </Alert>
-        </Snackbar>
       </Paper>
       <Paper aria-labelledby="form-title" className={classes.paper}>
         <FormLabel className="formLabel" id="form-dialog-title"> Change your neighborhood </FormLabel>
@@ -98,7 +93,7 @@ const UserProfile = ({updateUserBio, updateUserHood}) => {
         <Button className={classes.button} color="primary" onClick={handleHoodClick}>Save</Button>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} color="success">
-            New neighborhood saved!
+            Profile saved!
           </Alert>
         </Snackbar>
       </Paper>
