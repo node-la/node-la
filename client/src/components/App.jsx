@@ -300,22 +300,36 @@ class App extends React.Component {
           switch (view) {
             // posts view shows all posts
             case 'profile':
-              return <UserProfile updateUserBio={this.updateUserBio}/>
+              return (
+                loggedIn ? <UserProfile updateUserBio={this.updateUserBio}/>
+                  : <Typography variant="h5" style={{ textAlign: "center", color: "white" }}>
+                    Please log in to see your profile
+                </Typography>
+              )
             case 'posts':
-              return <Posts 
+              return (loggedIn ? <Posts 
                 changeView={this.changeView}
                 loggedIn={this.state.loggedIn} 
                 createPost={this.createPost}
                 posts={this.state.posts}
                 changeCurrentPost={this.changeCurrentPost}
                 getComments={this.getComments}
-                />;
+                />
+                : <div>
+                    <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+                      Welcome to NodeLA!
+                    </Typography>
+                    <Typography variant="h6" style={{ fontWeight: "bolder", textAlign: "center", color: "white"}}>
+                    Please log in.
+                    </Typography>
+                  </div>
+              )
             // userPosts shows posts from the user once logged in
             case 'userPosts':
               return (
                 loggedIn ? <UserPosts changeCurrentPost={this.changeCurrentPost} changeView={this.changeView} userPosts={this.state.userPosts}/> 
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
-                  Please Login to see your posts!
+                  Please log in to see your posts!
                 </Typography>)
             // Neighborhood shows all users from a given neighborhood
             case 'neighborhood':
@@ -325,7 +339,7 @@ class App extends React.Component {
                     You're the only one in the neighborhood...
                 </Typography>)
                   : <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
-                    Please Login to see your neighborhood
+                    Please log in to see your neighborhood
                 </Typography>
                 )
             // neighbor shows a particular neighbor
