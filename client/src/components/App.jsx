@@ -336,7 +336,7 @@ class App extends React.Component {
             case 'neighborhood':
               return (
                 loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
-                  : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
+                  : <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 20 }}>
                     You're the only one in the neighborhood...
                 </Typography>)
                   : <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
