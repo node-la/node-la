@@ -27,12 +27,13 @@ const useStyles = makeStyles(theme => ({
 
 const UserProfile = ({updateUserBio}) => {
   const classes = useStyles();
+  const [bio, setUserBio] = useState('');
   return (
     <div>
       <Paper aria-labelledby="form-title" className={classes.paper}>
         <FormLabel className="formLabel" id="form-dialog-title"> Edit your bio </FormLabel>
-          <TextField id="bio" label="Bio" type="bio" fullWidth />
-        <Button className={classes.button} color="primary" onClick={updateUserBio}>Save</Button>
+          <TextField id="bio" label="Bio" type="bio" value={bio} onChange={(e) => setUserBio(e.target.value)} fullWidth />
+        <Button className={classes.button} color="primary" onClick={() => updateUserBio(bio)}>Save</Button>
       </Paper>
     </div>
   )

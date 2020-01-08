@@ -265,8 +265,8 @@ class App extends React.Component {
   }
 
   // allows user to add and change their bio
-  updateUserBio() {
-    console.log('clicked');
+  updateUserBio(bio) {
+    console.log(bio);
   }
   
   render() {
