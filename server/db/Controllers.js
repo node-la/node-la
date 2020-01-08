@@ -99,6 +99,22 @@ const updateUser = function (req, res, next) {
   return next();
 };
 
+// update user bio
+const updateUserBio = function (req, res, next) {
+  const { newBio, username } = req.body;
+  User.update(
+    { bio: newBio},
+    { where: { username }}
+  )
+  .then(() => {
+    res.sendStatus(201);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  next();
+}
+
 //! DELETE USER
 const deleteUser = function (req, res, next) {
   User.destroy({
@@ -380,6 +396,7 @@ module.exports = {
   createUser,
   getSingleUser,
   getUsers,
+  updateUserBio,
   getNeighbors,
   updateUser,
   deleteUser,
