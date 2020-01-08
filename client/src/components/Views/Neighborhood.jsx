@@ -33,7 +33,7 @@ const Neighborhood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>Meet your neighbors:</Typography>
+      <Typography className={classes.pos} variant="h5" style={{ textAlign: "center", color: "white", marginTop: 20 }}>Meet your neighbors:</Typography>
       {neighbors.map((neighbor) => {  
         return (
           <Container className={classes.root}>
