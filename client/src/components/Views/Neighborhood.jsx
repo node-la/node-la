@@ -33,7 +33,7 @@ const Neighborhood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography className={classes.pos} variant="h5" style={{ textAlign: "center", color: "white", marginTop: 20 }}>Meet your neighbors:</Typography>
+      <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 15}}>Meet your neighbors:</Typography>
       {neighbors.map((neighbor) => {  
         return (
           <Container className={classes.root}>
@@ -47,7 +47,7 @@ const Neighborhood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
                   style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
                   onClick={() => getNeighbor(neighbor.username)}
                   >{neighbor.username}</Button>
-                <Typography align="center">{neighbor.bio}</Typography>
+                <Typography align="center">Bio: {neighbor.bio}</Typography>
               </CardContent>
             </Paper>
           </Container>
