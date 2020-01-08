@@ -37,7 +37,7 @@ const UserProfile = ({updateUserBio}) => {
 
   const handleClick = () => {
     setOpen(true);
-    () => updateUserBio(bio);
+    updateUserBio(bio);
   };
 
   const handleClose = (event, reason) => {
