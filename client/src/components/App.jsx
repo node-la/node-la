@@ -192,7 +192,7 @@ class App extends React.Component {
       })
       // then call changeView to change the view
       .then(() => {
-        this.changeView("Neighborhood");
+        this.changeView("neighborhood");
       })
       .catch((err) => {
         console.log(err);
@@ -318,7 +318,7 @@ class App extends React.Component {
                   Please Login to see your posts!
                 </Typography>)
             // Neighborhood shows all users from a given neighborhood
-            case 'Neighborhood':
+            case 'neighborhood':
               return (
                 loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
