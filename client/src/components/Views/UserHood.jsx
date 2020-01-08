@@ -37,7 +37,7 @@ const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
       {neighbors.map((neighbor) => {  
         return (
         <Container className={classes.root}>
-          {console.log(neighbor.username)}
+          {console.log(neighbor.bio)}
           <Card className={classes.card} key={neighbor.id}>
               <CardContent>
                 <Button 
@@ -47,7 +47,7 @@ const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
                   style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
                   onClick={() => getNeighbor(neighbor.username)}
                 >{neighbor.username}</Button>
-                <Typography align="center">here's my bio!</Typography>
+                <Typography align="center">{neighbor.bio}</Typography>
               </CardContent>
             </Card>
           </Container>
