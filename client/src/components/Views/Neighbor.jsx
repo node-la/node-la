@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper, Grid } from '@material-ui/core';
+import { Typography, Paper, Grid, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +20,7 @@ const Neighbor = ({ neighbor, neighborPosts, changeView, changeCurrentPost }) =>
   const classes = useStyles();
   return (
     <div>
-      <Typography variant="h5">{neighbor}</Typography>
+      <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>{neighbor}</Typography>
       {neighborPosts.map((post, index) =>
         <p>
           <Paper className={classes.paper} elevation={3} key={post.id}>
@@ -38,6 +38,13 @@ const Neighbor = ({ neighbor, neighborPosts, changeView, changeCurrentPost }) =>
               </Grid>
             </Grid>
           </Paper>
+          <Button
+            size="large"
+            fullWidth="true"
+            variant="text"
+            style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
+            onClick={() => getNeighbors()}
+          >Back to your neighborhood</Button>
         </p>
       )}
     </div>

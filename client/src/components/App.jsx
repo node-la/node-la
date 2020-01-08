@@ -4,11 +4,12 @@ import Post from './Views/Post.jsx';
 import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
 import UserProfile from './Views/UserProfile.jsx';
-import UserHood from './Views/UserHood.jsx';
+import Neighborhood from './Views/Neighborhood.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
 import Neighbor from './Views/Neighbor.jsx';
 import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -191,7 +192,7 @@ class App extends React.Component {
       })
       // then call changeView to change the view
       .then(() => {
-        this.changeView("userHood");
+        this.changeView("Neighborhood");
       })
       .catch((err) => {
         console.log(err);
@@ -215,6 +216,7 @@ class App extends React.Component {
         })
           .then((response) => {
             const neighborPosts = response.data.data;
+            console.log(neighborPosts);
             this.setState({
               neighborPosts
             })
@@ -277,7 +279,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { view, neighbors, neighbor, neighborPosts } = this.state;
+    const { view, neighbors, neighbor, neighborhood, neighborPosts } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -315,17 +317,28 @@ class App extends React.Component {
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                   Please Login to see your posts!
                 </Typography>)
-            // userHood shows all users from a given neighborhood
-            case 'userHood':
+            // Neighborhood shows all users from a given neighborhood
+            case 'Neighborhood':
               return (
-                neighbors.length > 0 ? <UserHood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
+                neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost}/>
+                neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
+                  : <div>
+                      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        style={{ cursor: 'pointer', width: 'auto', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        onClick={() => this.getNeighbors()}
+                        >Back to {neighborhood}
+                      </Button>
+                    </div>
+
               )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
