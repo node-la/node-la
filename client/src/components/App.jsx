@@ -283,6 +283,13 @@ class App extends React.Component {
   updateUserHood(newHood) {
     const { username } = this.state;
     console.log(newHood);
+    axios.patch('users/hood', {username, newHood})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(eror);
+      })
   }
   
   render() {

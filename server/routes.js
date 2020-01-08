@@ -13,6 +13,8 @@ module.exports = function (app, express) {
   app.get('/users/:username', ctrl.getSingleUser);
   // post user bio to database
   app.post('/users/bio', ctrl.updateUserBio);
+  // update user hood in db
+  app.patch('/users/hood', ctrl.updateUserHood);
   //get all users
   app.get('/users', ctrl.getUsers);
   // get all users in a given neighrborhood/neighbors of the logged in user
