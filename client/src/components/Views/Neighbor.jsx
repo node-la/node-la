@@ -15,8 +15,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
-  console.log(neighbor);
-  console.log(neighborPosts);
   const classes = useStyles();
   return (
     <div>
