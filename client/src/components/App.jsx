@@ -279,7 +279,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { view, neighbors, neighbor, neighborhood, neighborPosts } = this.state;
+    const { view, neighbors, neighbor, neighborhood, neighborPosts, username } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -314,6 +314,7 @@ class App extends React.Component {
                 posts={this.state.posts}
                 changeCurrentPost={this.changeCurrentPost}
                 getComments={this.getComments}
+                username={username}
                 />
                 : <div>
                     <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
