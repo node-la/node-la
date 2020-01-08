@@ -331,18 +331,18 @@ class App extends React.Component {
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
+                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
                   : <div>
-                      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        style={{ cursor: 'pointer', width: 'auto', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                        onClick={() => this.getNeighbors()}
-                        >Back to {neighborhood}
-                      </Button>
-                    </div>
-
+                    <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{ cursor: 'pointer', width: 'auto', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      onClick={() => this.getNeighbors()}
+                    >Back to your neighborhood
+                    </Button>
+                  </div>)
+                  : this.changeView('neighborhood')
               )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':
