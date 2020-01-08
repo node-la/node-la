@@ -50,3 +50,6 @@ module.exports = function (app, express) {
       });
   });
 };
+
+// trefle plant encyclopedia api request?
+// user can search for a plant by common name and get back some basic info
