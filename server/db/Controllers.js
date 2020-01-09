@@ -52,6 +52,30 @@ const getSingleUser = function (req, res, next) {
     });
 };
 
+// get username from user id
+const getSingleUserById = function (req, res, next) {
+  const id = req.params.userId;
+  console.log(id);
+  User.findOrCreate({
+    where: {
+      id: id
+    }
+  })
+    .then((response) => { // Find the user with the given auth0_id.
+      res.status(200).json({ // Send 200 status upon success.
+        status: 'success',
+        data: response,
+        message: 'Here\'s that username you asked for'
+      });
+    })
+    .catch(function (err) {
+      res.sendStatus(400);
+      console.log('Unfortunately I was unable to find that user\'s information', err);
+      return next();
+    });
+};
+
+
 //get all users
 const getUsers = function (req, res, next) {
   User.findAll({})
@@ -156,11 +180,11 @@ const createPost = function (req, res) {
   let postHoodId = null;
   let postUserId = null;
   //comment this line out
-  // let upOrDown = 'up';
+  let upOrDown = 'up';
   Hood.findOrCreate({
     where:{
     hoodName: hoodName,
-    // upOrDown: upOrDown,
+    upOrDown: upOrDown,
   }})
   .catch((err)=>{ err })
   .then((tuple) => {
@@ -415,6 +439,7 @@ module.exports = {
   getNeighborhoodsPosts,
   createUser,
   getSingleUser,
+  getSingleUserById,
   getUsers,
   updateUserBio,
   updateUserHood,
