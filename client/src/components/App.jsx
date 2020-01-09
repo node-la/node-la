@@ -95,21 +95,11 @@ class App extends React.Component {
     const { posts } = this.state;
     console.log(posts);
     const users = posts.map((post) => {
-      return axios.get(`/posts/user/${post}`);
+      return axios.get(`/posts/user/${post.userId}`);
     })
     const responses = Promise.all(users);
     console.log(responses);
-    // try {
-    //   const response = axios.all(users);
-    //   console.log(response);
-    // }
-    // catch (err) {
-    //   console.log(err.message);
-    // }
-    // axios.get('/postUsers')
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
+    
   }
 
   // function to get all posts from the signed in user and set username state
