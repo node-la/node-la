@@ -156,16 +156,18 @@ const createPost = function (req, res) {
   let postHoodId = null;
   let postUserId = null;
   //comment this line out
-  let upOrDown = 'up';
+  // let upOrDown = 'up';
   Hood.findOrCreate({
     where:{
     hoodName: hoodName,
-    upOrDown: upOrDown,
+    // upOrDown: upOrDown,
   }})
   .catch((err)=>{ err })
   .then((tuple) => {
     const createdHoodObj = tuple[0];
+    console.log(createdHoodObj);
     const newHoodObj = tuple[1];
+    console.log(newHoodObj);
     postHoodId = createdHoodObj.dataValues.id;
     return User.findOrCreate({
       where:{
