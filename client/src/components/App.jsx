@@ -46,6 +46,7 @@ class App extends React.Component {
     this.getHoodPosts = this.getHoodPosts.bind(this)
     this.getNeighbors = this.getNeighbors.bind(this)
     this.getNeighbor = this.getNeighbor.bind(this)
+    this.getPostUsername = this.getPostUsername.bind(this)
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
@@ -80,11 +81,35 @@ class App extends React.Component {
   getAllPosts() {
     return axios.get('/posts')
       .then(response => {
+        console.log(response.data.data);
         this.setState({
           posts: response.data.data.reverse(),
-        })
+        });
+        this.getPostUsername();
       })
       .catch(error => console.log(error))
+  }
+
+  // retrieve usernames for each post added to state from getAllPosts
+  getPostUsername() {
+    const { posts } = this.state;
+    console.log(posts);
+    const users = posts.map((post) => {
+      return axios.get(`/posts/user/${post}`);
+    })
+    const responses = Promise.all(users);
+    console.log(responses);
+    // try {
+    //   const response = axios.all(users);
+    //   console.log(response);
+    // }
+    // catch (err) {
+    //   console.log(err.message);
+    // }
+    // axios.get('/postUsers')
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
   }
 
   // function to get all posts from the signed in user and set username state
@@ -98,6 +123,7 @@ class App extends React.Component {
       }
     })
       .then(response => {
+        console.log(response);
         this.setState({
           userPosts: response.data.data.reverse(),
         })
