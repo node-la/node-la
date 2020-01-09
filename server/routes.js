@@ -11,6 +11,8 @@ module.exports = function (app, express) {
   app.post('/signup', ctrl.createUser);
   //get single user info
   app.get('/users/:username', ctrl.getSingleUser);
+  // post user bio to database
+  app.post('/users/bio', ctrl.updateUserBio);
   //get all users
   app.get('/users', ctrl.getUsers);
   // get all users in a given neighborhood/neighbors of the logged in user

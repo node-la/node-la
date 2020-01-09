@@ -25,7 +25,7 @@ const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, get
       {/* Contaner for each post */}
       {posts.map((post, index) => 
       <p>
-        <Paper className={classes.paper} elevation={3}>
+          <Paper className={classes.paper} elevation={3}>
           <Grid container spacing={3}>
             <Grid item>
             </Grid>

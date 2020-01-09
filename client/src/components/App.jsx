@@ -3,11 +3,13 @@ import axios from 'axios';
 import Post from './Views/Post.jsx';
 import Posts from './Views/Posts.jsx';
 import UserPosts from './Views/UserPosts.jsx';
-import UserHood from './Views/UserHood.jsx';
+import UserProfile from './Views/UserProfile.jsx';
+import Neighborhood from './Views/Neighborhood.jsx';
 import Neighborhoods from './Views/Neighborhoods.jsx';
 import Neighbor from './Views/Neighbor.jsx';
 import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class App extends React.Component {
     this.createPost = this.createPost.bind(this);
     this.getComments = this.getComments.bind(this);
     this.updateLogin = this.updateLogin.bind(this);
+    this.updateUserBio = this.updateUserBio.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
@@ -189,7 +192,7 @@ class App extends React.Component {
       })
       // then call changeView to change the view
       .then(() => {
-        this.changeView("userHood");
+        this.changeView("neighborhood");
       })
       .catch((err) => {
         console.log(err);
@@ -213,6 +216,7 @@ class App extends React.Component {
         })
           .then((response) => {
             const neighborPosts = response.data.data;
+            console.log(neighborPosts);
             this.setState({
               neighborPosts
             })
@@ -261,9 +265,21 @@ class App extends React.Component {
       loggedIn: !this.state.loggedIn,
     });
   }
+
+  // allows user to add and change their bio
+  updateUserBio(newBio) {
+    const { username } = this.state;
+    axios.post('/users/bio', { username, newBio })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error => {
+        console.log(error);
+      }))
+  }
   
   render() {
-    const { view, neighbors, neighbor, neighborPosts } = this.state;
+    const { view, neighbors, neighbor, neighborhood, neighborPosts } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -283,6 +299,8 @@ class App extends React.Component {
         {(() => {
           switch (view) {
             // posts view shows all posts
+            case 'profile':
+              return <UserProfile updateUserBio={this.updateUserBio}/>
             case 'posts':
               return <Posts 
                 changeView={this.changeView}
@@ -299,17 +317,32 @@ class App extends React.Component {
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                   Please Login to see your posts!
                 </Typography>)
-            // userHood shows all users from a given neighborhood
-            case 'userHood':
+            // Neighborhood shows all users from a given neighborhood
+            case 'neighborhood':
               return (
-                neighbors.length > 0 ? <UserHood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
+                loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
                     You're the only one in the neighborhood...
                 </Typography>)
+                  : <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
+                    Please Login to see your neighborhood
+                </Typography>
+                )
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost}/>
+                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
+                  : <div>
+                    <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{ cursor: 'pointer', width: 'auto', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      onClick={() => this.getNeighbors()}
+                    >Back to your neighborhood
+                    </Button>
+                  </div>)
+                  : this.changeView('neighborhood')
               )
             // neighborhoods shows posts based on what neighborhood is selected
             case 'neighborhoods':

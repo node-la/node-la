@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Card, CardContent, Typography, Button } from '@material-ui/core';
+import { Container, Card, CardContent, Typography, Button, Paper } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -29,16 +29,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
+const Neighborhood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>Meet your neighbors:</Typography>
+      <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 15}}>Meet your neighbors:</Typography>
       {neighbors.map((neighbor) => {  
         return (
-        <Container className={classes.root}>
-          {console.log(neighbor.username)}
-          <Card className={classes.card} key={neighbor.id}>
+          <Container className={classes.root}>
+            {console.log(neighbor.bio)}
+            <Paper className={classes.card} key={neighbor.id}>
               <CardContent>
                 <Button 
                   size="large" 
@@ -46,10 +46,10 @@ const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
                   variant="text" 
                   style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
                   onClick={() => getNeighbor(neighbor.username)}
-                >{neighbor.username}</Button>
-                <Typography align="center">here's my bio!</Typography>
+                  >{neighbor.username}</Button>
+                <Typography align="center">Bio: {neighbor.bio}</Typography>
               </CardContent>
-            </Card>
+            </Paper>
           </Container>
         )
       })}
@@ -57,4 +57,4 @@ const UserHood = ({ changeView, userPosts, neighbors, getNeighbor }) => {
   )
 }
 
-export default UserHood;
+export default Neighborhood;

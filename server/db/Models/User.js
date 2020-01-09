@@ -9,6 +9,11 @@ module.exports = (sequelize, type) => {
       type: type.STRING,
       allowNull: true,
       unique: false
+    },
+    bio: {
+      type: type.STRING,
+      allowNull: true,
+      unique: false
     }
   });
 };

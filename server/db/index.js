@@ -14,10 +14,11 @@ const sequelize = new Sequelize('nodela', 'root', '', mariaConfig);
 /*
 Next, we instantiate our models by passing a sequelize instance and library itself to required model files.
  */
+
 const User = UserModel(sequelize, Sequelize);
 const Hood = HoodModel(sequelize, Sequelize);
-const Comment = CommentModel(sequelize, Sequelize);
 const Post = PostModel(sequelize, Sequelize);
+const Comment = CommentModel(sequelize, Sequelize);
 const PostType = PostTypeModel(sequelize, Sequelize);
 
 /*
