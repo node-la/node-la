@@ -119,7 +119,7 @@ const deleteUser = function (req, res, next) {
 const createPost = function (req, res) {
   //todo
   //comment that in
-  const {username, hoodName, postBody, postType, title, /*upOrDown*/} = req.body;
+  const { username, hoodName, postBody, postType, title } = req.body;
   let postTypeId = null;
   let postHoodId = null;
   let postUserId = null;
@@ -130,7 +130,7 @@ const createPost = function (req, res) {
     hoodName: hoodName,
     upOrDown: upOrDown,
   }})
-  .catch((err)=>{ err })
+  // .catch((err)=>{ err })
   .then((tuple) => {
     const createdHoodObj = tuple[0];
     const newHoodObj = tuple[1];
@@ -140,7 +140,7 @@ const createPost = function (req, res) {
         username: username,
     }})
   })
-  .catch((err)=>{err; debugger;})
+  // .catch((err)=>{err; debugger;})
     //should check for use userid
   .then((tuple) => {
     const createdUserObj = tuple[0];

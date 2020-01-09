@@ -1,6 +1,6 @@
 const ctrl = require('./db/Controllers');
 const axios = require('axios');
-const { weatherKey } = require('./db/config.js');
+const { weatherKey } = require('./db/config');
 
 /*
 This file routes the client requests at a specific endpoint to a handling
@@ -13,7 +13,7 @@ module.exports = function (app, express) {
   app.get('/users/:username', ctrl.getSingleUser);
   //get all users
   app.get('/users', ctrl.getUsers);
-  // get all users in a given neighrborhood/neighbors of the logged in user
+  // get all users in a given neighborhood/neighbors of the logged in user
   app.get('/neighbors/:hood', ctrl.getNeighbors);
   //create a post
   app.post('/posts', ctrl.createPost);
