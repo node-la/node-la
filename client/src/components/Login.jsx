@@ -3,6 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Dialog, DialogActions, DialogContent, 
           DialogTitle, Button, Select, FormControl, 
           InputLabel, MenuItem } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+// import SelectNeighborhoodPopup from './Views/SelectNeighborhoodPopup.jsx'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,11 +19,11 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 140,
   }
 }));
 
-const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
+const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts, changeView }) => {
   const classes = useStyles();
   //user react hooks to set temp state of username
   const [open, setOpen] = useState(false);
@@ -37,6 +43,19 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
     setHood(event.target.value);
   };
 
+  // handle user signup to check for neighborhood value
+  // TODO: implement in a way that makes neighborhood required
+  const handleSignUp = (usernameValue, hood) => {
+    // if (!hood.length) {
+    //   // TODO: add popup or snackbar to let user know that a neighborhood is required
+    // } else {
+      updateLogin();
+      userSignUp(usernameValue, hood);
+      handleClose();
+    // }
+  }
+
+
   // console.log(usernameValue);
 
   return (
@@ -52,7 +71,7 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
                 value={usernameValue}
                 onChange={(e) => setUsernameValue(e.target.value)} fullWidth />
           {/* selection for neighborhoods */}
-          <FormControl className={classes.formControl}>
+          <FormControl required className={classes.formControl}>
             <InputLabel id="hood-select-label">Neighborhood</InputLabel>
             <Select
               labelId="hood-select-label"
@@ -82,8 +101,8 @@ const Login = ({ updateLogin, userSignUp, userLogin, getUserPosts }) => {
             {/* buttons in dialog box */}
             <DialogActions>
               <Button onClick={handleClose} color="primary">Cancel</Button>
-              <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue) }} color="primary">Login</Button>
-              <Button onClick={() => { handleClose(); updateLogin(); userSignUp(usernameValue, hood); }} color="primary">Sign Up</Button>
+              <Button onClick={() => { handleClose(); updateLogin(); userLogin(usernameValue); getUserPosts(usernameValue); changeView('posts') }} color="primary">Login</Button>
+              <Button onClick={() => { handleSignUp(usernameValue, hood); }} color="primary">Sign Up</Button>
             </DialogActions>
           </Dialog>
     </div>

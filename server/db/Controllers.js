@@ -115,6 +115,22 @@ const updateUserBio = function (req, res, next) {
   next();
 }
 
+// update user hood
+const updateUserHood = function (req, res, next) {
+  const { newHood, username } = req.body;
+  User.update(
+    { hood: newHood },
+    { where: { username } }
+  )
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  next();
+}
+
 //! DELETE USER
 const deleteUser = function (req, res, next) {
   User.destroy({
@@ -399,6 +415,7 @@ module.exports = {
   getSingleUser,
   getUsers,
   updateUserBio,
+  updateUserHood,
   getNeighbors,
   updateUser,
   deleteUser,

@@ -15,11 +15,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, getComments }) => {
+const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, getComments, username }) => {
   //use given style from above
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+        Welcome, {username}!
+      </Typography>
       {/* If logged in, show an 'add post' button */}
       {loggedIn ? <p><CreatePost className={classes.createPost} createPost={createPost}/></p> : null}
       {/* Contaner for each post */}

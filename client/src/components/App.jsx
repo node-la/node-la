@@ -40,6 +40,7 @@ class App extends React.Component {
     this.getComments = this.getComments.bind(this);
     this.updateLogin = this.updateLogin.bind(this);
     this.updateUserBio = this.updateUserBio.bind(this);
+    this.updateUserHood = this.updateUserHood.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
     this.getComments = this.getComments.bind(this);
     this.getHoodPosts = this.getHoodPosts.bind(this)
@@ -277,9 +278,21 @@ class App extends React.Component {
         console.log(error);
       }))
   }
+
+  // allows user to change their neighborhood
+  updateUserHood(newHood) {
+    const { username } = this.state;
+    axios.patch('users/hood', {username, newHood})
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
   
   render() {
-    const { view, neighbors, neighbor, neighborhood, neighborPosts } = this.state;
+    const { view, neighbors, neighbor, neighborhood, neighborPosts, username } = this.state;
     const { loggedIn } = this.state;
     return (
       <div>
@@ -300,38 +313,53 @@ class App extends React.Component {
           switch (view) {
             // posts view shows all posts
             case 'profile':
-              return <UserProfile updateUserBio={this.updateUserBio}/>
+              return (
+                loggedIn ? <UserProfile updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
+                  : <Typography variant="h5" style={{ textAlign: "center", color: "white" }}>
+                    Please log in to see your profile
+                </Typography>
+              )
             case 'posts':
-              return <Posts 
+              return (loggedIn ? <Posts 
                 changeView={this.changeView}
                 loggedIn={this.state.loggedIn} 
                 createPost={this.createPost}
                 posts={this.state.posts}
                 changeCurrentPost={this.changeCurrentPost}
                 getComments={this.getComments}
-                />;
+                username={username}
+                />
+                : <div>
+                    <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+                      Welcome to NodeLA!
+                    </Typography>
+                    <Typography variant="h6" style={{ fontWeight: "bolder", textAlign: "center", color: "white"}}>
+                    Please log in.
+                    </Typography>
+                  </div>
+              )
             // userPosts shows posts from the user once logged in
             case 'userPosts':
               return (
                 loggedIn ? <UserPosts changeCurrentPost={this.changeCurrentPost} changeView={this.changeView} userPosts={this.state.userPosts}/> 
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
-                  Please Login to see your posts!
+                  Please log in to see your posts!
                 </Typography>)
             // Neighborhood shows all users from a given neighborhood
             case 'neighborhood':
               return (
                 loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
-                  : <Typography variant="h4" style={{ fontWeight: "bold", textAlign: "center", color: "white" }}>
+                  : <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 20 }}>
                     You're the only one in the neighborhood...
                 </Typography>)
                   : <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
-                    Please Login to see your neighborhood
+                    Please log in to see your neighborhood
                 </Typography>
                 )
             // neighbor shows a particular neighbor
             case 'neighbor':
               return (
-                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
+                loggedIn ? (neighborPosts.length > 0 ? <Neighbor neighbor={neighbor} getNeighbors={this.getNeighbors} neighborPosts={neighborPosts} changeView={this.changeView} changeCurrentPost={this.changeCurrentPost} />
                   : <div>
                     <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>Looks like {neighbor} doesn't have any posts yet</Typography>
                     <Button
