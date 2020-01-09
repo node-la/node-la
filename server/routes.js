@@ -11,6 +11,8 @@ module.exports = function (app, express) {
   app.post('/signup', ctrl.createUser);
   //get single user info
   app.get('/users/:username', ctrl.getSingleUser);
+  //get single user info by id
+  app.get('/posts/user/:userId', ctrl.getSingleUserById);
   // post user bio to database
   app.post('/users/bio', ctrl.updateUserBio);
   // update user hood in db
