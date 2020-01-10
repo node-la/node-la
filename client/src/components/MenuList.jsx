@@ -5,7 +5,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import PersonIcon from '@material-ui/icons/Person';
+import SpaIcon from '@material-ui/icons/Spa';
 import Weather from './Weather.jsx';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
 const StyledMenu = withStyles({
   paper: {
@@ -38,7 +40,7 @@ const StyledMenuItem = withStyles(theme => ({
   },
 }))(MenuItem);
 
-const MenuList = ({ changeView, weatherIcon, weatherInfo }) => {
+const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   //target clicked element on menu
   const handleClick = event => {
@@ -73,18 +75,35 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo }) => {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("userPosts")}}>
+
+        <StyledMenuItem onClick={() => { changeView("profile"); }}>
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="User" />
+          <ListItemText primary="Your Profile" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={() => {changeView("neighborhoods")}}>
+
+        <StyledMenuItem onClick={() => { changeView("userPosts") }}>
+          <ListItemIcon>
+            <LibraryBooksIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Your Posts" />
+        </StyledMenuItem>
+
+        <StyledMenuItem onClick={() => { getNeighbors() }}>
+          <ListItemIcon>
+            <SpaIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="My Neighborhood" />
+        </StyledMenuItem>
+
+        <StyledMenuItem onClick={() => { changeView("neighborhoods"); }}>
           <ListItemIcon>
             <HomeWorkIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Neighborhoods" />
         </StyledMenuItem>
+        
         {/* Drop down weather widget */}
         <Weather weatherIcon={weatherIcon} weatherInfo={weatherInfo}/>
       </StyledMenu>

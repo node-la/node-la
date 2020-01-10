@@ -72,16 +72,15 @@ const Neighborhoods = ({ changeView, getHoodPosts, hoodPosts }) => {
                 <MenuItem value={'Bywater'}>Bywater</MenuItem>
                 <MenuItem value={'Carrollton'}>Carrollton</MenuItem>
                 <MenuItem value={'CBD'}>Central Business District</MenuItem>
-                <MenuItem value={'Downtown'}>Downtown</MenuItem>
                 <MenuItem value={'Fountainbleu'}>Fountainbleu</MenuItem>
                 <MenuItem value={'FQ'}>French Quarter</MenuItem>
+                <MenuItem value={'IrishChannel'}>Irish Channel</MenuItem>
                 <MenuItem value={'LGD'}>Lower Garden District</MenuItem>
                 <MenuItem value={'Lakeview'}>Lakeview</MenuItem>
                 <MenuItem value={'Marigny'}>Marigny</MenuItem>
                 <MenuItem value={'MidCity'}>Mid City</MenuItem>
                 <MenuItem value={'Riverbend'}>Riverbend</MenuItem>
                 <MenuItem value={'Treme'}>Treme</MenuItem>
-                <MenuItem value={'Uptown'}>Uptown</MenuItem>
                 <MenuItem value={'WestBank'}>West Bank</MenuItem>
               </Select>
             </FormControl>

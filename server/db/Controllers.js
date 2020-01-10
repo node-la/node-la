@@ -8,12 +8,12 @@ const app = express(feathers());
 //create & save a user to the db
 // !CREATE USER
 const createUser = function (req, res, next) {
-  const username = req.body.username; // Grab username from req body
-  const id = req.body.id; // Grab password from req body
+  const { username, hood, id } = req.body; // Grab username, id, and hood from req body
   // debugger;
   User.create({
-    username: username,
-    id: id
+    username,
+    hood,
+    id,
   })
     .then((data) => {
       res.status(201).json({ // Send 201 status upon success.
@@ -52,6 +52,30 @@ const getSingleUser = function (req, res, next) {
     });
 };
 
+// get username from user id
+const getSingleUserById = function (req, res, next) {
+  const id = req.params.userId;
+  console.log(id);
+  User.findOrCreate({
+    where: {
+      id: id
+    }
+  })
+    .then((response) => { // Find the user with the given auth0_id.
+      res.status(200).json({ // Send 200 status upon success.
+        status: 'success',
+        data: response,
+        message: 'Here\'s that username you asked for'
+      });
+    })
+    .catch(function (err) {
+      res.sendStatus(400);
+      console.log('Unfortunately I was unable to find that user\'s information', err);
+      return next();
+    });
+};
+
+
 //get all users
 const getUsers = function (req, res, next) {
   User.findAll({})
@@ -64,11 +88,24 @@ const getUsers = function (req, res, next) {
       }));
       return next();
     })
-    .catch(err => {
+    .catch(() => {
       res.status(400);
       return next();
     });
 };
+
+// get all users from a given neighborhood
+const getNeighbors = (req, res, next) => {
+  const { hood } = req.params
+  User.findAll({ where: { hood: hood } })
+    .then((users) => {
+      console.log(users);
+      res.send(users);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
 
 //Update User
 //! UPDATE
@@ -85,6 +122,38 @@ const updateUser = function (req, res, next) {
     });
   return next();
 };
+
+// update user bio
+const updateUserBio = function (req, res, next) {
+  const { newBio, username } = req.body;
+  User.update(
+    { bio: newBio},
+    { where: { username }}
+  )
+  .then(() => {
+    res.sendStatus(201);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  next();
+}
+
+// update user hood
+const updateUserHood = function (req, res, next) {
+  const { newHood, username } = req.body;
+  User.update(
+    { hood: newHood },
+    { where: { username } }
+  )
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  next();
+}
 
 //! DELETE USER
 const deleteUser = function (req, res, next) {
@@ -120,7 +189,9 @@ const createPost = function (req, res) {
   .catch((err)=>{ err })
   .then((tuple) => {
     const createdHoodObj = tuple[0];
+    console.log(createdHoodObj);
     const newHoodObj = tuple[1];
+    console.log(newHoodObj);
     postHoodId = createdHoodObj.dataValues.id;
     return User.findOrCreate({
       where:{
@@ -203,7 +274,9 @@ const usersPosts = function (req, res, next) {
     }));
     return next();
   })
-  .catch()
+  .catch((error) => {
+    console.log(error);
+  })
 }
 //! READ POST
 const getPosts = function (req, res, next) {
@@ -366,7 +439,11 @@ module.exports = {
   getNeighborhoodsPosts,
   createUser,
   getSingleUser,
+  getSingleUserById,
   getUsers,
+  updateUserBio,
+  updateUserHood,
+  getNeighbors,
   updateUser,
   deleteUser,
   createPost,
