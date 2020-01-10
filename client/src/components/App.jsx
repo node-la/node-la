@@ -46,6 +46,7 @@ class App extends React.Component {
     this.getHoodPosts = this.getHoodPosts.bind(this)
     this.getNeighbors = this.getNeighbors.bind(this)
     this.getNeighbor = this.getNeighbor.bind(this)
+    this.getPostUsername = this.getPostUsername.bind(this)
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
@@ -80,11 +81,43 @@ class App extends React.Component {
   getAllPosts() {
     return axios.get('/posts')
       .then(response => {
-        this.setState({
-          posts: response.data.data.reverse(),
-        })
+        console.log(response.data.data);
+        const posts = response.data.data;
+        // get usernames from db
+        this.getPostUsername(posts)
+          .then((responses) => {
+            console.log(responses);
+            // grab just the usernames from each response, 
+            // reverse them, 
+            // and add them to the state posts prop
+            const usernames = [];
+            responses.forEach((response) => {
+              usernames.push(response.data.data[0].username);
+            })
+            console.log(usernames)
+            // for each post, add username as prop
+            
+            posts.forEach((post, index) => {
+              post.username = usernames[index];
+            })
+            console.log(posts);
+            // then set posts as state
+            this.setState({
+              posts: posts.reverse(),
+            });
+          })
+          .catch(error => console.log(error))
       })
       .catch(error => console.log(error))
+  }
+
+  // retrieve usernames for each post added to state from getAllPosts
+  getPostUsername() {
+    const { posts } = this.state;
+    const users = posts.map((post) => {
+      return axios.get(`/posts/user/${post.userId}`);
+    })
+    return Promise.all(users);    
   }
 
   // function to get all posts from the signed in user and set username state
@@ -98,6 +131,7 @@ class App extends React.Component {
       }
     })
       .then(response => {
+        console.log(response);
         this.setState({
           userPosts: response.data.data.reverse(),
         })
@@ -314,7 +348,7 @@ class App extends React.Component {
             // posts view shows all posts
             case 'profile':
               return (
-                loggedIn ? <UserProfile updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
+                loggedIn ? <UserProfile neighborhood={neighborhood} updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
                   : <Typography variant="h5" style={{ textAlign: "center", color: "white" }}>
                     Please log in to see your profile
                 </Typography>
@@ -348,7 +382,7 @@ class App extends React.Component {
             // Neighborhood shows all users from a given neighborhood
             case 'neighborhood':
               return (
-                loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
+                loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} neighborhood={neighborhood} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 20 }}>
                     You're the only one in the neighborhood...
                 </Typography>)

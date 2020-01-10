@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAlert from '@material-ui/lab/Alert';
-import { Snackbar, FormLabel, Button, Paper, TextField, FormControl, Select, MenuItem } from '@material-ui/core';
+import { Snackbar, FormLabel, Button, Paper, TextField, FormControl, Select, MenuItem, Typography } from '@material-ui/core';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const UserProfile = ({updateUserBio, updateUserHood}) => {
+const UserProfile = ({ updateUserBio, updateUserHood, neighborhood }) => {
   const classes = useStyles();
   const [bio, setUserBio] = useState('');
   const [hood, setHood] = useState('');
@@ -69,7 +69,8 @@ const UserProfile = ({updateUserBio, updateUserHood}) => {
         <Button className={classes.button} color="primary" onClick={handleBioClick}>Save</Button>
       </Paper>
       <Paper aria-labelledby="form-title" className={classes.paper}>
-        <FormLabel className="formLabel" id="form-dialog-title"> Change your neighborhood </FormLabel>
+        <Typography>You're currently in {neighborhood}</Typography>
+        <FormLabel className="formLabel" id="form-dialog-title">Change your neighborhood </FormLabel>
         <FormControl className={classes.formControl}>
           <Select
             labelId="hood-select-label"
