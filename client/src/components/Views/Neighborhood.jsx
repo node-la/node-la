@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Card, CardContent, Typography, Button, Paper } from '@material-ui/core';
+import { Container, Grid, CardContent, Typography, Button, Paper } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +27,11 @@ const useStyles = makeStyles(theme => ({
   pos: {
     marginBottom: 12,
   },
+  paper: {
+    padding: theme.spacing(3),
+    margin: 'auto',
+    maxWidth: 700,
+  },
 }));
 
 const Neighborhood = ({ neighborhood, changeView, userPosts, neighbors, getNeighbor }) => {
@@ -36,21 +41,28 @@ const Neighborhood = ({ neighborhood, changeView, userPosts, neighbors, getNeigh
       <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 15}}>Meet your neighbors in {neighborhood}:</Typography>
       {neighbors.map((neighbor) => {  
         return (
-          <Container className={classes.root}>
-            {console.log(neighbor.bio)}
-            <Paper className={classes.card} key={neighbor.id}>
-              <CardContent>
-                <Button 
-                  size="large" 
-                  fullWidth="true" 
-                  variant="text" 
-                  style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
-                  onClick={() => getNeighbor(neighbor.username)}
-                  >{neighbor.username}</Button>
-                <Typography align="center">{neighbor.bio}</Typography>
-              </CardContent>
-            </Paper>
-          </Container>
+          <div>
+            <p>
+              <Paper className={classes.paper} elevation={3}>
+                <Grid container spacing={3}>
+                  <Grid item>
+                  </Grid>
+                  <Grid item xs={12} sm container>
+                    <Grid item xs container direction="column" spacing={2}>
+                      <Button
+                        size="large"
+                        fullWidth="true"
+                        variant="text"
+                        style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
+                        onClick={() => getNeighbor(neighbor.username)}
+                      >{neighbor.username}</Button>
+                      <Typography align="center">{neighbor.bio}</Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </p>
+          </div>
         )
       })}
     </div>
