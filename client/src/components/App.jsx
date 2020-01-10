@@ -82,10 +82,31 @@ class App extends React.Component {
     return axios.get('/posts')
       .then(response => {
         console.log(response.data.data);
-        this.setState({
-          posts: response.data.data.reverse(),
-        });
-        this.getPostUsername();
+        const posts = response.data.data;
+        // get usernames from db
+        this.getPostUsername(posts)
+          .then((responses) => {
+            console.log(responses);
+            // grab just the usernames from each response, 
+            // reverse them, 
+            // and add them to the state posts prop
+            const usernames = [];
+            responses.forEach((response) => {
+              usernames.push(response.data.data[0].username);
+            })
+            console.log(usernames)
+            // for each post, add username as prop
+            
+            posts.forEach((post, index) => {
+              post.username = usernames[index];
+            })
+            console.log(posts);
+            // then set posts as state
+            this.setState({
+              posts: posts.reverse(),
+            });
+          })
+          .catch(error => console.log(error))
       })
       .catch(error => console.log(error))
   }
@@ -93,13 +114,10 @@ class App extends React.Component {
   // retrieve usernames for each post added to state from getAllPosts
   getPostUsername() {
     const { posts } = this.state;
-    console.log(posts);
     const users = posts.map((post) => {
       return axios.get(`/posts/user/${post.userId}`);
     })
-    const responses = Promise.all(users);
-    console.log(responses);
-    
+    return Promise.all(users);    
   }
 
   // function to get all posts from the signed in user and set username state
@@ -330,7 +348,7 @@ class App extends React.Component {
             // posts view shows all posts
             case 'profile':
               return (
-                loggedIn ? <UserProfile updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
+                loggedIn ? <UserProfile neighborhood={neighborhood} updateUserBio={this.updateUserBio} updateUserHood={this.updateUserHood} />
                   : <Typography variant="h5" style={{ textAlign: "center", color: "white" }}>
                     Please log in to see your profile
                 </Typography>
