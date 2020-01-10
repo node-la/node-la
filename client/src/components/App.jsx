@@ -382,7 +382,7 @@ class App extends React.Component {
             // Neighborhood shows all users from a given neighborhood
             case 'neighborhood':
               return (
-                loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
+                loggedIn ? (neighbors.length > 0 ? <Neighborhood neighbors={neighbors} neighborhood={neighborhood} getNeighbor={this.getNeighbor} changeView={this.changeView} userPosts={this.state.userPosts} />
                   : <Typography variant="h5" style={{ fontWeight: "bold", textAlign: "center", color: "white", marginTop: 20 }}>
                     You're the only one in the neighborhood...
                 </Typography>)
