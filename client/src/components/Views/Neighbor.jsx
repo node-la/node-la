@@ -38,7 +38,7 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
                   <Typography gutterBottom id={index} variant="h5">
                     {post.title}
                   </Typography>
-                  <Typography variant="body2">{post.body}</Typography>
+                  <Typography variant="body2">{post.postBody}</Typography>
                 </Grid>
                 <Typography variant="subtitle2" color="textSecondary">{moment(post.createdAt).fromNow()}</Typography>
               </Grid>
