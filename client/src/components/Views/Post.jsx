@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import Comment from '../Comment.jsx';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,6 +53,8 @@ const Post = ({ changeView, currentPost, createComment }) => {
             <Typography variant="h6" color="primary" style={{ fontWeight: "bolder", textAlign: "right" }}>Username</Typography>
             <Typography variant="subtitle2" color="textSecondary" style={{ textAlign: "right" }}>Time of post</Typography>
             <Typography variant="h6">Post body placeholder text</Typography>
+            
+            <FavoriteBorderIcon size='medium'/>
           </Paper>
         </Grid>
         {/* Button with dialog box for adding comments*/}

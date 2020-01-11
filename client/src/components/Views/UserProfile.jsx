@@ -67,6 +67,8 @@ const UserProfile = ({ updateUserBio, updateUserHood, neighborhood }) => {
         <FormLabel className="formLabel" id="form-dialog-title"> Edit your bio </FormLabel>
           <TextField id="bio" label="Bio" type="bio" value={bio} onChange={(e) => setUserBio(e.target.value)} fullWidth />
         <Button className={classes.button} color="primary" onClick={handleBioClick}>Save</Button>
+        {/* <input type="file" name="url" onChange={this.handleUrl} />          
+        <button onClick={() => {uploadFile()}}>Upload</button> */}
       </Paper>
       <Paper aria-labelledby="form-title" className={classes.paper}>
         <Typography>You're currently in {neighborhood}</Typography>
