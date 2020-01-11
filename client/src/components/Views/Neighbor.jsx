@@ -26,7 +26,7 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
   const classes = useStyles();
   return (
     <div>
-      <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>{neighbor}'s posts</Typography>
+      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 15 }}>{neighbor}'s posts</Typography>
       {neighborPosts.map((post, index) =>
         <p>
           <Paper className={classes.paper} elevation={3} key={post.id}>
