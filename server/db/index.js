@@ -10,9 +10,11 @@ const PostTypeModel = require('./Models/PostType');
 const dotenv = require('dotenv');
 dotenv.config();
 
-//connect to mariadb using Sequelize methods
-// const sequelize = new Sequelize('nodela', 'root', '', localMariaConfig);
-const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
+//connect to local mariadb using Sequelize methods
+const sequelize = new Sequelize('nodela', 'root', '', localMariaConfig);
+
+// connect to cloud sql db
+// const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
 // const sequelize = new Sequelize(process.env.DB_NAME, '{db_user}', '{db_password}', {
 //   dialect: 'mysql',
 //   host: '/cloudsql/{instance}',
