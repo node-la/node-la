@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
   const classes = useStyles();
   return (
-    <div style={{textAlign: "center"}}>
+    <div>
       <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>{neighbor}'s posts</Typography>
       {neighborPosts.map((post, index) =>
         <p>
@@ -35,7 +35,7 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
               </Grid>
               <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>
-                  <Typography gutterBottom id={index} variant="h5">
+                  <Typography style={{float: 'left'}} gutterBottom id={index} variant="h5">
                     {post.title}
                   </Typography>
                   <Typography variant="body2">{post.postBody}</Typography>
@@ -46,14 +46,13 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
           </Paper>
         </p>
       )}
-      <Button
-        className={classes.button} 
-        size="large"
-        variant="contained"
-        align="center"
-        // style={{ color: 'white', fontWeight: "bold", cursor: 'pointer' }}
-        onClick={getNeighbors}
-      >Back to your neighborhood</Button>
+      <div style={{ textAlign: "center" }}>
+        <Button
+          className={classes.button} 
+          size="large"
+          onClick={getNeighbors}
+        >Back to your neighborhood</Button>
+      </div>
     </div>
   )
 }
