@@ -11,6 +11,7 @@ import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,7 @@ class App extends React.Component {
       neighbors: [],
       neighbor: '',
       neighborPosts: [],
+      userProfilePic: null,
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -323,6 +325,63 @@ class App extends React.Component {
         console.log(error);
       })
   }
+
+  // handleUrl(event){
+  //   const file = event.target.files[0]
+  //   // console.log('file', event.target.files[0])
+  //   this.setState({selectedFile: file});
+    
+  //   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
+  //   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
+  //     const file = event.target.files[0];
+  //     const formData = new FormData();
+  //     formData.append('file', file);
+  //     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    
+  //   axios({
+  //       url:CLOUDINARY_URL,
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/x-www-form-urlencoded'
+  //       },
+  //       data: formData
+  //   })
+  //   .then((res) => {
+  //     let url = res.data.url
+  //     // axios.post('/user'{})
+  //       console.log('res', url)
+  //       //save this link to db
+  //   })
+  //   .catch((err)=> {
+  //       console.log('error with cloudinary', err)
+  //   });
+
+  // }
+//  handleUploadProfilePicture(){
+//   const file = event.target.files[0]
+//   this.setState({selectedFile: file});
+//   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
+//   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
+//     const formData = new FormData();
+//     formData.append('file', file);
+//     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  
+//   axios({
+//       url:CLOUDINARY_URL,
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded'
+//       },
+//       data: formData
+//   })
+//   .then((res) => {
+//     let url = res.data.url
+//     // axios.post('/user'{})
+//       console.log('res', url)
+//       //save this link to db
+//   })
+//  }
+
   
   render() {
     const { view, neighbors, neighbor, neighborhood, neighborPosts, username } = this.state;
@@ -377,7 +436,8 @@ class App extends React.Component {
                 loggedIn ? <UserPosts changeCurrentPost={this.changeCurrentPost} changeView={this.changeView} userPosts={this.state.userPosts}/> 
               : <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>
                   Please log in to see your posts!
-                </Typography>)
+                </Typography>
+                    )
             // Neighborhood shows all users from a given neighborhood
             case 'neighborhood':
               return (

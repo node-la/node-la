@@ -430,7 +430,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
     debugger;
   })
   .catch((err)=>{
-    debugger;
+   
   })
 }
 

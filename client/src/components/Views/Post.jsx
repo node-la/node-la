@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import Comment from '../Comment.jsx';
 import moment from 'moment';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
   root: {
