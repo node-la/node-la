@@ -66,6 +66,10 @@
     "type": "git",
     "url": "git+https://github.com/node-la/node-la.git"
   },
+  "engines": {
+    "node": "8.16.2",
+    "npm": "6.4.1"
+  },
   "keywords": [],
   "author": "Ryan Moragas, Jill Poole, & Paul Stumpe",
   "license": "ISC",
