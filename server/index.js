@@ -34,6 +34,9 @@ app.configure(socketio());
 app.use(express.errorHandler());
 //app.configure(auth)
 
+//trust proxy
+app.set('trust proxy', true);
+
 const route = router(app, express);
 
 const PORT = process.env.PORT || 8000;
