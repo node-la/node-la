@@ -1,15 +1,26 @@
 'use strict';
 
-const mariaConfig = require('./config');
+const { localMariaConfig, sqlConfig } = require('./config');
 const Sequelize = require('sequelize');
 const UserModel = require('./Models/User');
 const HoodModel = require('./Models/Hood');
 const CommentModel = require('./Models/Comment');
 const PostModel = require('./Models/Post');
 const PostTypeModel = require('./Models/PostType');
+const dotenv = require('dotenv');
+dotenv.config();
 
 //connect to mariadb using Sequelize methods
-const sequelize = new Sequelize('nodela', 'root', '', mariaConfig);
+// const sequelize = new Sequelize('nodela', 'root', '', localMariaConfig);
+const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
+// const sequelize = new Sequelize(process.env.DB_NAME, '{db_user}', '{db_password}', {
+//   dialect: 'mysql',
+//   host: '/cloudsql/{instance}',
+//   timestamps: false,
+//   dialectOptions: {
+//     socketPath: '/cloudsql/{instance}'
+//   },
+// });
 
 /*
 Next, we instantiate our models by passing a sequelize instance and library itself to required model files.
