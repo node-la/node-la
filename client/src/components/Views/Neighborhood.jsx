@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Neighborhood = ({ neighborhood, changeView, userPosts, neighbors, getNeighbor }) => {
+const Neighborhood = ({ neighborhood, changeView, userPosts, neighbors, getNeighbor, }) => {
   const classes = useStyles();
   return (
     <div>

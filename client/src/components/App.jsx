@@ -30,8 +30,10 @@ class App extends React.Component {
       hoodPosts: [],
       neighbors: [],
       neighbor: '',
-      neighborPosts: [],
+      neighborPosts: [{title: 'titel',
+    body: 'body'}],
       userProfilePic: null,
+      favorites: [],
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -52,6 +54,7 @@ class App extends React.Component {
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
+    this.getFavoites = this.getFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -326,61 +329,31 @@ class App extends React.Component {
       })
   }
 
-  // handleUrl(event){
-  //   const file = event.target.files[0]
-  //   // console.log('file', event.target.files[0])
-  //   this.setState({selectedFile: file});
+  toggleFavorite(postId, neighborName){
+    console.log(post);
+    axios.patch('/favorites', {
+      postId: postId,
+      neighborName: neighborName
+  })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => {
+      console.log('err with toggle favoreite', err)
+    })
     
-  //   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
-  //   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
-  //     const file = event.target.files[0];
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-  //     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    
-  //   axios({
-  //       url:CLOUDINARY_URL,
-  //       method: 'POST',
-  //       headers: {
-  //           'Content-Type': 'application/x-www-form-urlencoded'
-  //       },
-  //       data: formData
-  //   })
-  //   .then((res) => {
-  //     let url = res.data.url
-  //     // axios.post('/user'{})
-  //       console.log('res', url)
-  //       //save this link to db
-  //   })
-  //   .catch((err)=> {
-  //       console.log('error with cloudinary', err)
-  //   });
+  }
 
-  // }
-//  handleUploadProfilePicture(){
-//   const file = event.target.files[0]
-//   this.setState({selectedFile: file});
-//   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
-//   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-  
-//   axios({
-//       url:CLOUDINARY_URL,
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//       },
-//       data: formData
-//   })
-//   .then((res) => {
-//     let url = res.data.url
-//     // axios.post('/user'{})
-//       console.log('res', url)
-//       //save this link to db
-//   })
-//  }
+  getFavoites(){
+    axios.get('/favorites')
+    .then(response => {
+      console.log(response)
+    })
+    .then(this.setState({favorites: response}))
+    .catch(err => {
+      console.log('err with get favorites' , err)
+    })
+  }
 
   
   render() {
@@ -399,6 +372,7 @@ class App extends React.Component {
           userLogin={this.userLogin}
           getUserPosts={this.getUserPosts}
           getNeighbors={this.getNeighbors}
+          getFavorites={this.getFavorites}
         />
         {/* Post view changes base on state */}
         {(() => {
@@ -483,6 +457,26 @@ class App extends React.Component {
               comments={this.state.comments}
               loggedIn={this.state.loggedIn}
               />;
+              case 'favorites':
+                return (loggedIn ? <Posts 
+                  favorites={this.state.favorites}
+                  changeView={this.changeView}
+                  loggedIn={this.state.loggedIn} 
+                  createPost={this.createPost}
+                  posts={this.state.posts}
+                  changeCurrentPost={this.changeCurrentPost}
+                  getComments={this.getComments}
+                  username={username}
+                  />
+                  : <div>
+                      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+                        Welcome to NodeLA!
+                      </Typography>
+                      <Typography variant="h6" style={{ fontWeight: "bolder", textAlign: "center", color: "white"}}>
+                      Please log in.
+                      </Typography>
+                    </div>
+                )
           }
         })()}
       </div>
