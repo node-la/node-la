@@ -49,7 +49,7 @@ const Post = ({ changeView, currentPost, createComment }) => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h3" style={{ fontWeight: "bolder", textAlign: "center" }}>{currentPost.title}</Typography>
-            <Typography variant="h6" color="primary" style={{ fontWeight: "bolder", textAlign: "right" }}>Username</Typography>
+            <Typography variant="h6" color="primary" style={{ fontWeight: "bolder", textAlign: "right" }}>{currentPost.username}</Typography>
             <Typography variant="subtitle2" color="textSecondary" style={{ textAlign: "right" }}>{moment(post.createdAt).fromNow()}</Typography>
             <Typography variant="h6">{currentPost.postBody}</Typography>
           </Paper>
