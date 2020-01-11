@@ -18,7 +18,7 @@ const sqlConfig = {
   user: 'root',
   host: DB_HOST,
   password: DB_PASS,
-  dialect: 'mariadb',
+  dialect: 'mysql',
   database: 'nodela'
 };
 
