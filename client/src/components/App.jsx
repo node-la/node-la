@@ -112,8 +112,7 @@ class App extends React.Component {
   }
 
   // retrieve usernames for each post added to state from getAllPosts
-  getPostUsername() {
-    const { posts } = this.state;
+  getPostUsername(posts) {
     const users = posts.map((post) => {
       return axios.get(`/posts/user/${post.userId}`);
     })
