@@ -19,15 +19,6 @@ const { DB_PASS } = process.env;
 const sequelize = new Sequelize('nodela', 'root', DB_PASS, sqlConfig);
 
 
-// const sequelize = new Sequelize(process.env.DB_NAME, '{db_user}', '{db_password}', {
-//   dialect: 'mysql',
-//   host: '/cloudsql/{instance}',
-//   timestamps: false,
-//   dialectOptions: {
-//     socketPath: '/cloudsql/{instance}'
-//   },
-// });
-
 /*
 Next, we instantiate our models by passing a sequelize instance and library itself to required model files.
  */
