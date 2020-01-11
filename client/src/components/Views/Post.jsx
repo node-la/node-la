@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 import Comment from '../Comment.jsx';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,10 +48,10 @@ const Post = ({ changeView, currentPost, createComment }) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Typography variant="h3" style={{ fontWeight: "bolder", textAlign: "center" }}>Post Title</Typography>
+            <Typography variant="h3" style={{ fontWeight: "bolder", textAlign: "center" }}>{currentPost.title}</Typography>
             <Typography variant="h6" color="primary" style={{ fontWeight: "bolder", textAlign: "right" }}>Username</Typography>
-            <Typography variant="subtitle2" color="textSecondary" style={{ textAlign: "right" }}>Time of post</Typography>
-            <Typography variant="h6">Post body placeholder text</Typography>
+            <Typography variant="subtitle2" color="textSecondary" style={{ textAlign: "right" }}>{moment(post.createdAt).fromNow()}</Typography>
+            <Typography variant="h6">{currentPost.postBody}</Typography>
           </Paper>
         </Grid>
         {/* Button with dialog box for adding comments*/}
