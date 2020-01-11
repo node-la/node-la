@@ -8,7 +8,7 @@ const localMariaConfig = {
   host: 'localhost',
   password: '',
   database: 'nodela',
-  dialect: 'mariadb',
+  dialect: 'mysql',
   dialectOptions: {
     connectionTimeout: 1000
   }
@@ -20,11 +20,11 @@ const sqlConfig = {
   password: DB_PASS,
   dialect: 'mysql',
   database: 'nodela',
-  host: `/cloudsql/${CLOUD_SQL_INSTANCE_CONNECTION_NAME}`,
+  // host: `/cloudsql/${CLOUD_SQL_INSTANCE_CONNECTION_NAME}`,
   timestamps: false,
-  dialectOptions: {
-    socketPath: `/cloudsql/${CLOUD_SQL_INSTANCE_CONNECTION_NAME}`
-  },
+  // dialectOptions: {
+  //   socketPath: `/cloudsql/${CLOUD_SQL_INSTANCE_CONNECTION_NAME}`
+  // },
 };
 
 module.exports = {
