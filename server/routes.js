@@ -9,7 +9,7 @@ function.
 module.exports = function (app, express) {
   //login to an account/get a single user
   app.post('/signup', ctrl.createUser);
-  //get single user info
+  //get single user info``
   app.get('/users/:username', ctrl.getSingleUser);
   //get single user info by id
   app.get('/posts/user/:userId', ctrl.getSingleUserById);

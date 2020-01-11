@@ -10,19 +10,14 @@ const PostTypeModel = require('./Models/PostType');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const { DB_PASS } = process.env;
+
 //connect to local mariadb using Sequelize methods
 const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
 
 // connect to cloud sql db
-// const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
-// const sequelize = new Sequelize(process.env.DB_NAME, '{db_user}', '{db_password}', {
-//   dialect: 'mysql',
-//   host: '/cloudsql/{instance}',
-//   timestamps: false,
-//   dialectOptions: {
-//     socketPath: '/cloudsql/{instance}'
-//   },
-// });
+const sequelize = new Sequelize('nodela', 'root', DB_PASS, sqlConfig);
+
 
 /*
 Next, we instantiate our models by passing a sequelize instance and library itself to required model files.

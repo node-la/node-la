@@ -11,6 +11,7 @@ import NavBar from './NavBar.jsx';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -28,8 +29,14 @@ class App extends React.Component {
       neighborhood: "Fountainbleu",
       hoodPosts: [],
       neighbors: [],
+<<<<<<< HEAD
       neighbor: "",
       neighborPosts: []
+=======
+      neighbor: '',
+      neighborPosts: [],
+      userProfilePic: null,
+>>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -129,9 +136,14 @@ class App extends React.Component {
   }
 
   // retrieve usernames for each post added to state from getAllPosts
+<<<<<<< HEAD
   getPostUsername() {
     const { posts } = this.state;
     const users = posts.map(post => {
+=======
+  getPostUsername(posts) {
+    const users = posts.map((post) => {
+>>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
       return axios.get(`/posts/user/${post.userId}`);
     });
     return Promise.all(users);
@@ -354,6 +366,66 @@ class App extends React.Component {
       });
   }
 
+<<<<<<< HEAD
+=======
+  // handleUrl(event){
+  //   const file = event.target.files[0]
+  //   // console.log('file', event.target.files[0])
+  //   this.setState({selectedFile: file});
+    
+  //   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
+  //   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
+  //     const file = event.target.files[0];
+  //     const formData = new FormData();
+  //     formData.append('file', file);
+  //     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    
+  //   axios({
+  //       url:CLOUDINARY_URL,
+  //       method: 'POST',
+  //       headers: {
+  //           'Content-Type': 'application/x-www-form-urlencoded'
+  //       },
+  //       data: formData
+  //   })
+  //   .then((res) => {
+  //     let url = res.data.url
+  //     // axios.post('/user'{})
+  //       console.log('res', url)
+  //       //save this link to db
+  //   })
+  //   .catch((err)=> {
+  //       console.log('error with cloudinary', err)
+  //   });
+
+  // }
+//  handleUploadProfilePicture(){
+//   const file = event.target.files[0]
+//   this.setState({selectedFile: file});
+//   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
+//   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
+//     const formData = new FormData();
+//     formData.append('file', file);
+//     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  
+//   axios({
+//       url:CLOUDINARY_URL,
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded'
+//       },
+//       data: formData
+//   })
+//   .then((res) => {
+//     let url = res.data.url
+//     // axios.post('/user'{})
+//       console.log('res', url)
+//       //save this link to db
+//   })
+//  }
+
+  
+>>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
   render() {
     const {
       view,
@@ -452,7 +524,11 @@ class App extends React.Component {
                 >
                   Please log in to see your posts!
                 </Typography>
+<<<<<<< HEAD
               );
+=======
+                    )
+>>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
             // Neighborhood shows all users from a given neighborhood
             case "neighborhood":
               return loggedIn ? (

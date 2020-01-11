@@ -153,7 +153,7 @@ const updateUserBio = function (req, res, next) {
   .catch((error) => {
     console.log(error);
   })
-  next();
+  // next();
 }
 
 // update user hood
@@ -460,7 +460,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
   }})
   // .catch((err) => { debugger; })
   .then((hood) => {
-      debugger;
+      // debugger;
       postHoodId = hood.dataValues.id;
       return Post.findAll( {where: {
         postHoodId: postHoodId
@@ -472,7 +472,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
     debugger;
   })
   .catch((err)=>{
-    debugger;
+   
   })
 }
 
