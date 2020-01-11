@@ -19,6 +19,10 @@ module.exports = (sequelize, type) => {
     postVotes: {
       type: type.INTEGER,
       allowNull: false
+    },
+    favePostId: {
+      type: type.INTEGER,
+      allowNull: false
     }
   });
 };
