@@ -12,13 +12,21 @@ const useStyles = makeStyles(theme => ({
     margin: 'auto',
     maxWidth: 700,
   },
+  button: {
+    background: 'linear-gradient(45deg, #00796b 30%, #43a047 90%)',
+    borderRadius: 4,
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    // margin: 'auto'
+  },
 }));
 
 const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
   const classes = useStyles();
   return (
-    <div>
-      <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>{neighbor}</Typography>
+    <div style={{textAlign: "center"}}>
+      <Typography variant="h4" style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}>{neighbor}'s posts</Typography>
       {neighborPosts.map((post, index) =>
         <p>
           <Paper className={classes.paper} elevation={3} key={post.id}>
@@ -39,10 +47,11 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
         </p>
       )}
       <Button
+        className={classes.button} 
         size="large"
-        fullWidth="true"
-        variant="text"
-        style={{ color: 'white', fontWeight: "bold", cursor: 'pointer' }}
+        variant="contained"
+        align="center"
+        // style={{ color: 'white', fontWeight: "bold", cursor: 'pointer' }}
         onClick={getNeighbors}
       >Back to your neighborhood</Button>
     </div>
