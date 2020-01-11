@@ -15,16 +15,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, getComments }) => {
+const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, getComments, username }) => {
   //use given style from above
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+        Welcome, {username}!
+      </Typography>
       {/* If logged in, show an 'add post' button */}
       {loggedIn ? <p><CreatePost className={classes.createPost} createPost={createPost}/></p> : null}
       {/* Contaner for each post */}
       {posts.map((post, index) => 
-      <p>
+      <p key={post.id}>
           <Paper className={classes.paper} elevation={3}>
           <Grid container spacing={3}>
             <Grid item>
@@ -36,7 +39,7 @@ const Posts = ({ changeView, loggedIn, createPost, posts, changeCurrentPost, get
                     {post.title}
                   </Typography>
                   <Typography variant="body2">{post.body}</Typography>
-                  <Typography variant="body2" style={{ color: '#00796b', fontWeight: "bolder"}}>Username</Typography>
+                  <Typography variant="body2" style={{ color: '#00796b', fontWeight: "bolder"}}>{post.username}</Typography>
               </Grid>
                 <Typography variant="subtitle2" color="textSecondary">{moment(post.createdAt).fromNow()}</Typography>
             </Grid>

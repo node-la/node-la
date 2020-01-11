@@ -11,8 +11,12 @@ module.exports = function (app, express) {
   app.post('/signup', ctrl.createUser);
   //get single user info
   app.get('/users/:username', ctrl.getSingleUser);
+  //get single user info by id
+  app.get('/posts/user/:userId', ctrl.getSingleUserById);
   // post user bio to database
   app.post('/users/bio', ctrl.updateUserBio);
+  // update user hood in db
+  app.patch('/users/hood', ctrl.updateUserHood);
   //get all users
   app.get('/users', ctrl.getUsers);
   // get all users in a given neighborhood/neighbors of the logged in user
@@ -48,3 +52,6 @@ module.exports = function (app, express) {
       });
   });
 };
+
+// trefle plant encyclopedia api request?
+// user can search for a plant by common name and get back some basic info

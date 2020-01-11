@@ -14,9 +14,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Neighbor = ({ neighbor, neighborPosts, changeView, changeCurrentPost }) => {
-  console.log(neighbor);
-  console.log(neighborPosts);
+const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
   const classes = useStyles();
   return (
     <div>
@@ -38,15 +36,15 @@ const Neighbor = ({ neighbor, neighborPosts, changeView, changeCurrentPost }) =>
               </Grid>
             </Grid>
           </Paper>
-          <Button
-            size="large"
-            fullWidth="true"
-            variant="text"
-            style={{ color: '#00796b', fontWeight: "bold", cursor: 'pointer' }}
-            onClick={() => getNeighbors()}
-          >Back to your neighborhood</Button>
         </p>
       )}
+      <Button
+        size="large"
+        fullWidth="true"
+        variant="text"
+        style={{ color: 'white', fontWeight: "bold", cursor: 'pointer' }}
+        onClick={getNeighbors}
+      >Back to your neighborhood</Button>
     </div>
   )
 }
