@@ -8,6 +8,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import SpaIcon from '@material-ui/icons/Spa';
 import Weather from './Weather.jsx';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const StyledMenu = withStyles({
   paper: {
@@ -104,6 +105,12 @@ const MenuList = ({ changeView, weatherIcon, weatherInfo, getNeighbors }) => {
           <ListItemText primary="Neighborhoods" />
         </StyledMenuItem>
         
+        <StyledMenuItem onClick={() => { changeView("favorite"); getFavorites()} }>
+          <ListItemIcon>
+            <FavoriteIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Your Favorites" />
+        </StyledMenuItem>
         {/* Drop down weather widget */}
         <Weather weatherIcon={weatherIcon} weatherInfo={weatherInfo}/>
       </StyledMenu>

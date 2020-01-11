@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Paper, Grid, Button } from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +32,9 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
                   <Typography gutterBottom id={index} variant="h5">
                     {post.title}
                   </Typography>
+                  {post.favorite === true} 
+                  ?  <FavoriteIcon size='medium' />
+                  :  <FavoriteBorderIcon size='medium'/>
                   <Typography variant="body2">{post.body}</Typography>
                 </Grid>
                 <Typography variant="subtitle2" color="textSecondary">{moment(post.createdAt).fromNow()}</Typography>
