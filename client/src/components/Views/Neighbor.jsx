@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
+const Neighbor = ({ neighbor, neighborPosts, getNeighbors, toggleFavorite }) => {
   const classes = useStyles();
   return (
     <div>
@@ -36,7 +36,7 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors }) => {
                   <Typography gutterBottom id={index} variant="h5">
                     {post.title}
                   </Typography>
-                  <FavoriteBorderIcon size="medium" />
+                  <FavoriteBorderIcon size="medium" id={post.id} onClick={() => {toggleFavorite(post.id, neighbor)}} />
                   <Typography variant="body2">{post.body}</Typography>
                 </Grid>
                 <Typography variant="subtitle2" color="textSecondary">

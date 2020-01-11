@@ -20,9 +20,9 @@ module.exports = (sequelize, type) => {
       type: type.INTEGER,
       allowNull: false
     },
-    favePostId: {
-      type: type.INTEGER,
-      allowNull: false
+    favedStatus: {
+      type: type.BOOLEAN,
+      allowNull: true
     }
   });
 };

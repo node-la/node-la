@@ -118,7 +118,7 @@ const getFaves = (req, res, next) => {
     }
   }).
   then((user) => {
-    
+
   })
 }
 
@@ -240,18 +240,18 @@ const createPost = function (req, res) {
       userId: postUserId,
     });
   })
-  .then((data) => {
-    data;
-    res.status(201)
-      .json({
-        status: 'success',
-        data: data,
-        message: 'Created a new Post!'
-      });
-  })
+  // .then((data) => {
+  //   data;
+  //   res.status(201)
+  //     .json({
+  //       status: 'success',
+  //       data: data,
+  //       message: 'Created a new Post!'
+  //     });
+  // })
   .catch((err) => {
     res.status(400);
-    console.log('There was an error creating that post!'), err;
+    console.log('There was an error creating that post!', err);
     return next();
   });
 };
@@ -315,19 +315,44 @@ const getPosts = function (req, res, next) {
     });
 };
 
+const getFavePosts = function (req, res, next) {
+  const {
+    userId
+  } = req.query;
+  Post.findAll({
+    where: {
+      userId: id
+    }
+  })
+    .then((response) => {
+      res.status(200);
+      res.send(JSON.stringify({
+        status: 'success',
+        data: response,
+        message: 'Here are all the posts!'
+      }));
+      return next();
+    })
+    .catch(err => {
+      res.sendStatus(400);
+      console.log(err);
+      return next();
+    });
+};
+
 //!UPDATE POST
 const updatePost = function (req, res, next) {
+  console.log(req.body);
   Post.update({
-    // title: newTitle,
-    // postBody: newPostBody,
-    // }, {
-    // where: {
-    //   id: postId
-    // }
+    favedStatus: true,
+    }, {
+    where: {
+      id: req.body.postId
+    }
   })
     .then((newPost) => {
-      res.status(201);
-      console.log(`This post has been updated to ${newPost}`);
+      res.status(201).send(newPost);
+      // console.log(`This post has been updated to ${newPost}`);
     });
 };
 
@@ -433,7 +458,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
     where: {
       hoodName: hoodName,
   }})
-  .catch((err) => { debugger; })
+  // .catch((err) => { debugger; })
   .then((hood) => {
       debugger;
       postHoodId = hood.dataValues.id;
@@ -454,6 +479,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
 
 module.exports = {
   getFaves,
+  getFavePosts,
   getNeighborhoodsPosts,
   createUser,
   getSingleUser,

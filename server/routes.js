@@ -37,6 +37,8 @@ module.exports = function (app, express) {
   app.get('/neighborhoods/posts', ctrl.getNeighborhoodsPosts);
   //get faves for a user
   app.get('/users:id/faves', ctrl.getFaves);
+  //patch fave posts to toggle status
+  app.patch('/favorites', ctrl.updatePost);
 
   //darksky current weather api request
   app.get('/weather', (req, res) => {
