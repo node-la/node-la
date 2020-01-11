@@ -22,6 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Host static files from the current folder
 app.use(express.static(CLIENT_PATH));
+// serve static files 
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+});
 // Enable REST service support
 app.configure(express.rest());
 // Configure Socket.io real-time APIs
