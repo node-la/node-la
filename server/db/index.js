@@ -51,6 +51,11 @@ User.hasMany(Post, {
   constraints: false
 });
 
+User.hasMany(Post, {
+  foreignKey: 'favePostId',
+  constraints: false
+});
+
 Post.hasMany(Comment, {
   foreignKey: 'commentUsersId',
   constraints: false
