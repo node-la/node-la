@@ -107,6 +107,23 @@ const getNeighbors = (req, res, next) => {
     })
 }
 
+// get all faves from a user
+const getFaves = (req, res, next) => {
+// find our user
+  const id = req.params.userId;
+  console.log(id);
+  User.findOrCreate({
+    where: {
+      id: id
+    }
+  }).
+  then((user) => {
+    
+  })
+}
+
+
+
 //Update User
 //! UPDATE
 const updateUser = function (req, res, next) {
@@ -436,6 +453,7 @@ const getNeighborhoodsPosts = function(req, res, next) {
 
 
 module.exports = {
+  getFaves,
   getNeighborhoodsPosts,
   createUser,
   getSingleUser,
