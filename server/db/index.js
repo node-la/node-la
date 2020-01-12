@@ -13,10 +13,10 @@ dotenv.config();
 const { DB_PASS } = process.env;
 
 //connect to local mariadb using Sequelize methods
-const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
+ const sequelize = new Sequelize('nodela', 'root', '', sqlConfig);
 
 // connect to cloud sql db
-const sequelize = new Sequelize('nodela', 'root', DB_PASS, sqlConfig);
+//const sequelize = new Sequelize('nodela', 'root', DB_PASS, sqlConfig);
 
 
 /*

@@ -29,14 +29,9 @@ class App extends React.Component {
       neighborhood: "Fountainbleu",
       hoodPosts: [],
       neighbors: [],
-<<<<<<< HEAD
       neighbor: "",
-      neighborPosts: []
-=======
-      neighbor: '',
       neighborPosts: [],
-      userProfilePic: null,
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
+      favorites: [],
     };
 
     this.userLogin = this.userLogin.bind(this);
@@ -57,6 +52,7 @@ class App extends React.Component {
     this.getUserPosts = this.getUserPosts.bind(this);
     this.createComment = this.createComment.bind(this);
     this.changeCurrentPost = this.changeCurrentPost.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
     this.toggleFavorite = this.toggleFavorite.bind(this);
   }
 
@@ -77,19 +73,19 @@ class App extends React.Component {
     });
   }
 
-  toggleFavorite(postId, neighborName) {
-    // console.log(post);
-    axios
-      .patch("/favorites", {
-        postId: postId,
-        neighborName: neighborName
-      })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log("err with toggle favorite", err);
-      });
+  toggleFavorite() {
+    console.log('i hate plants')
+    // axios
+    //   .patch("/favorites", {
+    //     postId: postId,
+    //     neighborName: neighborName
+    //   })
+      // .then(response => {
+      //   console.log(response);
+      // })
+      // .catch(err => {
+      //   console.log("err with toggle favorite", err);
+      // });
   }
 
   // function to get the loacl weather when app renders
@@ -136,14 +132,8 @@ class App extends React.Component {
   }
 
   // retrieve usernames for each post added to state from getAllPosts
-<<<<<<< HEAD
-  getPostUsername() {
-    const { posts } = this.state;
-    const users = posts.map(post => {
-=======
   getPostUsername(posts) {
     const users = posts.map((post) => {
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
       return axios.get(`/posts/user/${post.userId}`);
     });
     return Promise.all(users);
@@ -276,6 +266,7 @@ class App extends React.Component {
     return axios
       .get(`/users/${neighbor}`)
       .then(response => {
+        debugger
         const neighbor = response.data.data[0].username;
         this.setState({
           neighbor
@@ -288,6 +279,7 @@ class App extends React.Component {
             }
           })
           .then(response => {
+            debugger;
             const neighborPosts = response.data.data;
             console.log(neighborPosts);
             this.setState({
@@ -366,66 +358,33 @@ class App extends React.Component {
       });
   }
 
-<<<<<<< HEAD
-=======
-  // handleUrl(event){
-  //   const file = event.target.files[0]
-  //   // console.log('file', event.target.files[0])
-  //   this.setState({selectedFile: file});
-    
-  //   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
-  //   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
-  //     const file = event.target.files[0];
-  //     const formData = new FormData();
-  //     formData.append('file', file);
-  //     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    
-  //   axios({
-  //       url:CLOUDINARY_URL,
-  //       method: 'POST',
-  //       headers: {
-  //           'Content-Type': 'application/x-www-form-urlencoded'
-  //       },
-  //       data: formData
-  //   })
-  //   .then((res) => {
-  //     let url = res.data.url
-  //     // axios.post('/user'{})
-  //       console.log('res', url)
-  //       //save this link to db
-  //   })
-  //   .catch((err)=> {
-  //       console.log('error with cloudinary', err)
-  //   });
+  toggleFavorite(postId, neighborName){
+    axios.patch('/favorites', {
+      postId: postId,
+      neighborName: neighborName
+  })
+    .then(response => {
+      alert("This post has been faved!!");
+    })
+    .catch(err => {
+      console.log('err with toggle favorite', err)
+    })
 
-  // }
-//  handleUploadProfilePicture(){
-//   const file = event.target.files[0]
-//   this.setState({selectedFile: file});
-//   const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dx8lsbkh7/image/upload/';
-//   const CLOUDINARY_UPLOAD_PRESET = 'a5lm50bv';
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-  
-//   axios({
-//       url:CLOUDINARY_URL,
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//       },
-//       data: formData
-//   })
-//   .then((res) => {
-//     let url = res.data.url
-//     // axios.post('/user'{})
-//       console.log('res', url)
-//       //save this link to db
-//   })
-//  }
+    
+  }
 
-  
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
+  getFavorites(){
+    axios.get('/favorites')
+    .then(response => {
+      console.log(response)
+    })
+    .then(this.setState({favorites: response}))
+    .catch(err => {
+      console.log('err with get favorites' , err)
+    })
+  }
+
+
   render() {
     const {
       view,
@@ -449,6 +408,7 @@ class App extends React.Component {
           userLogin={this.userLogin}
           getUserPosts={this.getUserPosts}
           getNeighbors={this.getNeighbors}
+          getFavorites={this.getFavorites}
         />
         {/* Post view changes base on state */}
         {(() => {
@@ -524,11 +484,7 @@ class App extends React.Component {
                 >
                   Please log in to see your posts!
                 </Typography>
-<<<<<<< HEAD
-              );
-=======
                     )
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
             // Neighborhood shows all users from a given neighborhood
             case "neighborhood":
               return loggedIn ? (
@@ -621,16 +577,34 @@ class App extends React.Component {
                 />
               );
             // post view shows the post clicked on with it's comments
-            case "post":
-              return (
-                <Post
+            case 'post':
+              return <Post
+              changeView={this.changeView}
+              currentPost={this.state.currentPost}
+              createComment={this.createComment}
+              comments={this.state.comments}
+              loggedIn={this.state.loggedIn}
+              />;
+              case 'favorites':
+                return (loggedIn ? <Posts 
+                  favorites={this.state.favorites}
                   changeView={this.changeView}
-                  currentPost={this.state.currentPost}
-                  createComment={this.createComment}
-                  comments={this.state.comments}
-                  loggedIn={this.state.loggedIn}
-                />
-              );
+                  loggedIn={this.state.loggedIn} 
+                  createPost={this.createPost}
+                  posts={this.state.posts}
+                  changeCurrentPost={this.changeCurrentPost}
+                  getComments={this.getComments}
+                  username={username}
+                  />
+                  : <div>
+                      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 20 }}>
+                        Welcome to NodeLA!
+                      </Typography>
+                      <Typography variant="h6" style={{ fontWeight: "bolder", textAlign: "center", color: "white"}}>
+                      Please log in.
+                      </Typography>
+                    </div>
+                )
           }
         })()}
       </div>

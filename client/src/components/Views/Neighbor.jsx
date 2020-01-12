@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Paper, Grid, Button } from '@material-ui/core';
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,33 +28,54 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors, toggleFavorite }) => 
   const classes = useStyles();
   return (
     <div>
-<<<<<<< HEAD
       <Typography
-        variant="h4"
-        style={{ fontWeight: "bolder", textAlign: "center", color: "white" }}
+        variant="h5"
+        style={{
+          fontWeight: "bolder",
+          textAlign: "center",
+          color: "white",
+          marginTop: 15
+        }}
       >
-        {neighbor}
+        {neighbor}'s posts
       </Typography>
       {neighborPosts.map((post, index) => (
-=======
-      <Typography variant="h5" style={{ fontWeight: "bolder", textAlign: "center", color: "white", marginTop: 15 }}>{neighbor}'s posts</Typography>
-      {neighborPosts.map((post, index) =>
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
-        <p>
+        <p id={post.id}>
           <Paper className={classes.paper} elevation={3} key={post.id}>
             <Grid container spacing={3}>
               <Grid item></Grid>
               <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>
-                  <Typography style={{float: 'left'}} gutterBottom id={index} variant="h5">
+                  <Typography
+                    style={{ float: "left" }}
+                    gutterBottom
+                    id={index}
+                    variant="h5"
+                  >
                     {post.title}
                   </Typography>
-<<<<<<< HEAD
-                  <FavoriteBorderIcon size="medium" id={post.id} onClick={() => {toggleFavorite(post.id, neighbor)}} />
                   <Typography variant="body2">{post.body}</Typography>
-=======
+
                   <Typography variant="body2">{post.postBody}</Typography>
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
+                  {/* <div>
+                    {post.body !== post.body
+                    ? <FavoriteIcon size="medium" />
+                    : <FavoriteBorderIcon
+                      size="medium"
+                      id={post.id}
+                      onClick={() => {
+                        toggleFavorite(post.body, neighbor);
+                        debugger;
+                      }}
+                    />}
+                  </div> */}
+                  <FavoriteBorderIcon
+                    size="medium"
+                    onClick={() => {
+                      toggleFavorite(post.id, neighbor);
+                    }}
+                  />
+                  <Typography variant="body2">{post.body}</Typography>
                 </Grid>
                 <Typography variant="subtitle2" color="textSecondary">
                   {moment(post.createdAt).fromNow()}
@@ -63,27 +84,12 @@ const Neighbor = ({ neighbor, neighborPosts, getNeighbors, toggleFavorite }) => 
             </Grid>
           </Paper>
         </p>
-<<<<<<< HEAD
       ))}
-      <Button
-        size="large"
-        fullWidth="true"
-        variant="text"
-        style={{ color: "white", fontWeight: "bold", cursor: "pointer" }}
-        onClick={getNeighbors}
-      >
-        Back to your neighborhood
-      </Button>
-=======
-      )}
       <div style={{ textAlign: "center" }}>
-        <Button
-          className={classes.button} 
-          size="large"
-          onClick={getNeighbors}
-        >Back to your neighborhood</Button>
+        <Button className={classes.button} size="large" onClick={getNeighbors}>
+          Back to your neighborhood
+        </Button>
       </div>
->>>>>>> 65b480d0e1e38b2f725dcc6f16593e4ca63a1c90
     </div>
   );
 }

@@ -9,7 +9,6 @@ const app = express(feathers());
 // !CREATE USER
 const createUser = function (req, res, next) {
   const { username, hood, id } = req.body; // Grab username, id, and hood from req body
-  // debugger;
   User.create({
     username,
     hood,
@@ -351,8 +350,13 @@ const updatePost = function (req, res, next) {
     }
   })
     .then((newPost) => {
-      res.status(201).send(newPost);
+      res.status(201).send();
       // console.log(`This post has been updated to ${newPost}`);
+    })
+    .catch(err => {
+      res.sendStatus(400);
+      console.log(err);
+      return next();
     });
 };
 
